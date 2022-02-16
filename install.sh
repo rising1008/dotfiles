@@ -22,6 +22,10 @@ DOT_DIR="~/.dotfiles"
 # Main
 #----------------------------------------------------------------------
 
+: Install XCode Command Line Tool.
+xcode-select --install
+
+: Clone a repository of dotfiles
 if [ ! -d ${DOT_DIR} ]; then
   if [ ! -z `type -p git` ]; then
     git clone https://github.com/rising1008/dotfiles.git ${DOT_DIR}
