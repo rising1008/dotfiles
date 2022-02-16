@@ -1,0 +1,5 @@
+# Ignore macOS thumbnail file
+.DS_Store
+
+# Ignore `brew bundle` lock file
+Brewfile.lock.json
