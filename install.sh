@@ -38,3 +38,8 @@ fi
 
 ${DOT_DIR}/settings/darwin/.macos
 
+: Install Homebrew
+[ ! -z `type -p brew` ] || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+: Install Formulas
+brew bundle --file ${DOT_DIR}/settings/darwin/Brewfile
