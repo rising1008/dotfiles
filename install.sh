@@ -43,16 +43,18 @@ fi
 : Install Formulas
 brew bundle --file ${DOT_DIR}/settings/darwin/Brewfile
 
-for f in *;
+for f in ${DOT_DIR}/settings/darwin/*;
 do
     [[ "$f" == "Brewfile" ]] && continue
     [[ "$f" == ".macos" ]] && continue
+    [[ "$f" == ".config" ]] && continue
     [[ "$f" == "com.googlecode.iterm2.plist" ]] && continue
 
-    ln -snf $DOT_DIR/settings/darwin/"$f" $HOME/".$f"
+    ln -snf "$f" "$HOME/.${f##*/}"
 done
 
-ln -snf ${DOT_DIR}/settings/darwin/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist 1>/dev/null 2>&1
+ln -snf ${DOT_DIR}/settings/darwin/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
+ln -snf ${DOT_DIR}/settings/darwin/config/nvim ${HOME}/.config/nvim
 
 : Setup Vim
 printf -- "[6] Set Up NeoVim.\n"

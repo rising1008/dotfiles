@@ -63,5 +63,6 @@ cask "powershell"
 cask "karabiner-elements"
 cask "zoom"
 cask "miro"
+cask "docker"
 
 cask "font-noto-sans-cjk-jp"
