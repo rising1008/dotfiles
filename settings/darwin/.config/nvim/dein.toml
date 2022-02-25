@@ -1,0 +1,120 @@
+[[plugins]]
+repo = 'Shougo/vimfiler'
+hook_add = '''
+  let g:vimfiler_as_default_explorer = 1
+  let g:vimfiler_safe_mode_by_default = 0
+  nnoremap <C-f> :VimFiler -split -simple -winwidth=35 -no-quit
+'''
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'Shougo/unite-outline'
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+  let g:lightline = {
+    \ 'colorscheme': 'landscape',
+    \ 'separator': { 'left': '⮀', 'right': '⮂' },
+    \ 'subseparator': { 'left': '⮁', 'right': '⮃'},
+    \ 'mode_map': {'c': 'NORMAL'},
+    \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename', 'modified' ] ],
+      \   'right' : [ [ 'lineinfo', 'syntastic'],
+      \               [ 'percent'],
+      \               [ 'fileformat', 'fileencoding', 'filetype'] ]
+      \ },
+    \ 'component' : {
+      \   'lineinfo': '⭡ %3l:%-2v'
+      \ },
+      \ 'component_function': {
+      \   'modified': 'MyModified',
+      \   'readonly': 'MyReadonly',
+      \   'fugitive': 'MyFugitive',
+      \   'filename': 'MyFilename',
+      \   'fileformat': 'MyFileformat',
+      \   'filetype': 'MyFiletype',
+      \   'fileencoding': 'MyFileencoding',
+      \   'mode': 'MyMode'
+      \ }
+    \ }
+  let g:lightline.tabline = {'right': [['rows'], ['cd'], ['tabopts'] ]}
+  let g:lightline.tab = {
+      \ 'active': [ 'tabnum', 'filename', 'modified' ],
+      \ 'inactive': [ 'tabnum', 'filename', 'modified' ]
+    \ }
+  let g:lightline.tab_component_function = {
+      \ 'filename': 'LightlineTabFilename',
+      \ 'modified': 'lightline#tab#modified',
+      \ 'readonly': 'lightline#tab#readonly',
+      \ 'tabnum': 'lightline#tab#tabnum'
+    \ }
+'''
+
+[[plugins]]
+repo = 'kannokanno/previm'
+hook_add = '''
+  let g:previm_enable_realtime = 1
+  nnoremap <silent> <C-o> :PrevimOpen<CR>
+'''
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --bin'
+merged = '0'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = 'fzf'
+hook_add = '''
+  command! -bang -nargs=* Rg
+    \ call fzf#vim#grep(
+    \   'rg --line-number --no-heading '.shellescape(<q-args>), 0,
+    \   fzf#vim#with_preview({'options': '--exact --reverse'}, 'right:50%:wrap'))
+'''
+
+[[plugins]]
+repo = 'mbbill/undotree'
+hook_add = '''
+if has("persistent_undo")
+  set undodir=$XDG_CACHE_HOME/undodir/
+  set undofile
+endif
+let g:undotree_WindowLayout = 2          " undotreeは左側/diffは下にウィンドウ幅で表示
+let g:undotree_ShortIndicators = 1       " 時間単位は短く表示
+let g:undotree_SplitWidth = 30           " undotreeのウィンドウ幅
+let g:undotree_SetFocusWhenToggle = 1    " undotreeを開いたらフォーカスする
+"let g:undotree_DiffAutoOpen = 0         " diffウィンドウは起動時無効
+let g:undotree_DiffpanelHeight = 8       " diffウィンドウの行数
+"let g:undotree_HighlightChangedText = 0 " 変更箇所のハイライト無効
+
+" undotreeバッファ内でのキーバインド設定
+function! g:Undotree_CustomMap()
+  map <silent> <buffer> <Esc> q
+  map <silent> <buffer> h ?
+endfunction
+'''
+
+[[plugins]]
+repo = 'preservim/nerdtree'
+
+[[plugins]]
+repo = 'Xuyuanp/nerdtree-git-plugin'
+
+[[plugins]]
+repo = 'editorconfig/editorconfig-vim'
+
+[[plugins]]
+repo = 'PProvost/vim-ps1'
+hook_add = '''
+  let g:ps1_nofold_blocks = 1
+  let g:ps1_nofold_sig = 1
+'''

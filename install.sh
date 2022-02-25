@@ -42,3 +42,21 @@ fi
 
 : Install Formulas
 brew bundle --file ${DOT_DIR}/settings/darwin/Brewfile
+
+for f in *;
+do
+    [[ "$f" == "Brewfile" ]] && continue
+    [[ "$f" == ".macos" ]] && continue
+    [[ "$f" == "com.googlecode.iterm2.plist" ]] && continue
+
+    ln -snf $DOT_DIR/settings/darwin/"$f" $HOME/".$f"
+done
+
+ln -snf ${DOT_DIR}/settings/darwin/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist 1>/dev/null 2>&1
+
+: Setup Vim
+printf -- "[6] Set Up NeoVim.\n"
+[ -d ${HOME}/.cache/dein/repos/github.com/Shougo/dein.vim ] || curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ${HOME}/installer.sh
+[ -d ${HOME}/.cache/dein/repos/github.com/Shougo/dein.vim ] || sh ${HOME}/installer.sh ${HOME}/.cache/dein
+
+printf -- "    finished install.\n"

@@ -1,0 +1,23 @@
+[[plugins]]
+repo = 'tpope/vim-markdown'
+on_ft = ['markdown']
+hook_add = '''
+  autocmd BufRead,BufNewFile *.mkd  set filetype=markdown
+  autocmd BufRead,BufNewFile *.md  set filetype=markdown
+  let g:vim_markdown_folding_disabled=1
+'''
+
+[[plugins]]
+repo = 'leafgarland/typescript-vim'
+on_ft = ['typescript']
+hook_add = '''
+  autocmd BufRead,BufNewFile *.ts set filetype=typescript
+  let g:typescript_indent_disable = 1
+'''
+
+[[plugins]]
+repo = 'ianks/vim-tsx'
+on_ft = ['typescript']
+hook_add = '''
+  autocmd BufRead,BufNewFile *.tsx set filetype=typescript
+'''

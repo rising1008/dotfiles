@@ -1,0 +1,101 @@
+#!/bin/env bash
+
+http() {
+  local method="$1"
+  local url="$2"
+  local file="$3"
+  [ -n "$url"] || retrun 1
+
+  if type curl &>/dev/null; then
+    "http_${method}_curl" "$url" "$file"
+  elif type wget &>/dev/null; then
+    "http_${method}_wget" "$url" "$file"
+  else
+    echo "error: please install \`curl\` or \`wget\` and try again" >&2
+    exit 1
+  fi
+}
+
+http_head_curl() {
+  curl -qsILf "$1" >&4 2>&1
+}
+
+http_get_curl() {
+  curl -q -o "${2:--}" -sSLf "$1"
+}
+
+http_head_wget() {
+  wget -q --spider "$1" >&4 2>&1
+}
+
+http_get_wget() {
+  wget -nv -O "${2:--}" "$1"
+}
+
+jvmls() {
+/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -V
+}
+
+gb() {
+  local branches branch
+  branches=$(git branch -vv) &&
+  branch=$(echo "$branches" | fzf +m) &&
+  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
+
+gbr() {
+  local branches branch
+  branches=$(git branch --all | grep -v HEAD) &&
+  branch=$(echo "$branches" |
+           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
+gl() {
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {}
+FZF-EOF"
+}
+
+fd() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+
+fzf-cd-widget() {
+  local cmd="${FZF_ALT_C_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
+    -o -type d -print 2> /dev/null | cut -b3-"}"
+  setopt localoptions pipefail no_aliases 2> /dev/null
+  local dir="$(eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse $FZF_ALT_C_OPTS" $(__fzfcmd) +m)"
+  if [[ -z "$dir" ]]; then
+    zle redisplay
+    return 0
+  fi
+  cd "$dir"
+  unset dir # ensure this doesn't end up appearing in prompt expansion
+  local ret=$?
+  zle fzf-redraw-prompt
+  return $ret
+}
+
+fzf-history-widget() {
+  local selected num
+  selected=( $(fc -rl 1 | perl -ne 'print if !$seen{($_ =~ s/^\s*[0-9]+\s+//r)}++' |
+    FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS --query=${(qqq)LBUFFER} +m" $(__fzfcmd)) )
+  local ret=$?
+  if [ -n "$selected" ]; then
+    num=$selected[1]
+    if [ -n "$num" ]; then
+      zle vi-fetch-history -n $num
+    fi
+  fi
+  zle reset-prompt
+  return $ret
+}

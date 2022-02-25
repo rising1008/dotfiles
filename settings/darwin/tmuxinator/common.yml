@@ -1,0 +1,40 @@
+# ~/.tmuxinator/sensored.yml
+
+name: common
+root: ~/
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+# startup_window: logs
+
+windows:
+  - edit:
+      layout: b61d,364x79,0,0{218x79,0,0,15,145x79,219,0[145x8,219,0{120x8,219,0,16,24x8,340,0,17},145x43,219,9,18,145x26,219,53,19]}
+      panes:
+        - pane0: 
+          - cd ~/Workspace/sensored-karakuri
+          - vim
+        - pane1: 
+          - htop
+        - pane2: 
+          - calendar
+        - pane3: 
+          - cd ~/Workspace/sensored-karakuri
+        - pane4: 
+          - cd ~/Workspace/sensored-karakuri
+#  - server: 
+#  - logs: tail -f log/development.log
