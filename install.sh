@@ -33,10 +33,9 @@ if [ ! -d ${DOT_DIR} ]; then
   fi
 else
   echo "dotfiles already exists"
-  exit 1
 fi
 
-${DOT_DIR}/settings/darwin/.macos
+#${DOT_DIR}/settings/darwin/.macos
 
 : Install Homebrew
 [ ! -z `type -p brew` ] || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
