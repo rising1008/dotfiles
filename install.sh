@@ -35,3 +35,6 @@ else
   echo "dotfiles already exists"
   exit 1
 fi
+
+${DOT_DIR}/settings/darwin/.macos
+
