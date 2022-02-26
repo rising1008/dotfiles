@@ -35,7 +35,7 @@ else
   echo "dotfiles already exists"
 fi
 
-#${DOT_DIR}/settings/darwin/.macos
+bash ${DOT_DIR}/settings/darwin/.macos
 
 : Install Homebrew
 [ ! -z `type -p brew` ] || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -45,10 +45,11 @@ brew bundle --file ${DOT_DIR}/settings/darwin/Brewfile
 
 for f in ${DOT_DIR}/settings/darwin/*;
 do
-    [[ "$f" == "Brewfile" ]] && continue
-    [[ "$f" == ".macos" ]] && continue
-    [[ "$f" == ".config" ]] && continue
-    [[ "$f" == "com.googlecode.iterm2.plist" ]] && continue
+    [[ "${f##*/}" == "Brewfile" ]] && continue
+    [[ "${f##*/}" == ".Brewfile.lock.json" ]] && continue
+    [[ "${f##*/}" == ".macos" ]] && continue
+    [[ "${f##*/}" == ".config" ]] && continue
+    [[ "${f##*/}" == "com.googlecode.iterm2.plist" ]] && continue
 
     ln -snf "$f" "$HOME/.${f##*/}"
 done
