@@ -18,3 +18,6 @@ alias g="git"
 alias h="history"
 alias lock="m screensaver"
 alias dnsflush='dscacheutil -flushcache'
+
+# for bc.
+alias bc='bc -q'
