@@ -68,5 +68,6 @@ cask "discord"
 cask "google-japanese-ime"
 cask "kindle"
 cask "alfred"
+cask "nosql-workbench"
 
 cask "font-noto-sans-cjk-jp"
