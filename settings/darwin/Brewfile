@@ -50,6 +50,7 @@ brew "git"
 brew "nodebrew"
 brew "pyenv"
 
+cask "vlc"
 cask "vagrant"
 cask "iterm2"
 cask "gimp"

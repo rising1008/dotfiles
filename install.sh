@@ -19,20 +19,27 @@ DOT_DIR="${HOME}/.dotfiles"
 
 
 #----------------------------------------------------------------------
-# Main
+# Sanity Check
 #----------------------------------------------------------------------
 
-: Clone a repository of dotfiles
-if [ ! -d ${DOT_DIR} ]; then
-  if [ ! -z `type -p git` ]; then
-    git clone https://github.com/rising1008/dotfiles.git ${DOT_DIR}
-  else
+: Sanity Check for git
+if [ -z `type -p git` ]; then
     printf -- 'You don\'t seem to have git installed.\n;
     printf -- 'Install it: xcode-select --install\n'
     exit 127
-  fi
+fi
+
+
+#----------------------------------------------------------------------
+# Main
+#----------------------------------------------------------------------
+
+printf -- 'Clonning the dotfiles repository... ';
+: Clone a repository of dotfiles
+if [ ! -d ${DOT_DIR} ]; then
+  git clone https://github.com/rising1008/dotfiles.git ${DOT_DIR}
 else
-  echo "dotfiles already exists"
+  echo "  dotfiles already exists!"
 fi
 
 bash ${DOT_DIR}/settings/darwin/.macos
@@ -63,3 +70,4 @@ printf -- "[6] Set Up NeoVim.\n"
 [ -d ${HOME}/.cache/dein/repos/github.com/Shougo/dein.vim ] || sh ${HOME}/installer.sh ${HOME}/.cache/dein
 
 printf -- "    finished install.\n"
+
