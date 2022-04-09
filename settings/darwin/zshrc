@@ -15,7 +15,7 @@ if type brew &>/dev/null; then
 fi
 
 # set variables
-export HOMEBREW_GITHUB_API_TOKEN=751410abc6c5551861eb7c1de3ff8a2b59463496
+export HOMEBREW_GITHUB_API_TOKEN=
 export PATH=$HOME/.dotfiles/bin:$PATH
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
@@ -40,3 +40,16 @@ export FZF_CTRL_T_OPTS='--height 80% --reverse --border --preview "bat  --color=
 export FZF_CTRL_R_OPTS='--height 50% --reverse'
 
 eval "$(pyenv init -)"
+
+set rtp+=$(brew --prefix)/opt/fzf
+
+# fbr - checkout git branch
+function fzf-checkout-branch() {
+  local branches branch
+  # branches=$(git branch | sed -e 's/\(^\* \|^  \)//g' | cut -d " " -f 1) &&
+  branches=$(git branch | sed -e 's/^ *//g' -e 's/^* *//g') &&
+  branch=$(echo "$branches" | fzf --preview "git show --color=always") &&
+  git checkout $(echo "$branch")
+}
+zle     -N   fzf-checkout-branch
+bindkey "^b" fzf-checkout-branch

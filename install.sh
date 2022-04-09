@@ -14,27 +14,50 @@ set -e
 #----------------------------------------------------------------------
 # Constants
 #----------------------------------------------------------------------
-DOT_WORK_DIR="$(cd "$(dirname "$0")"; pwd)"
-DOT_DIR="${HOME}/.dotfiles"
+readonly DOT_WORK_DIR="$(cd "$(dirname "$0")"; pwd)"
+readonly DOT_DIR="${HOME}/.dotfiles"
 
+spin() {
+  local i=0
+  local sp='/-\|'
+  local n=${#sp}
+  printf ' '
+  sleep 0.1
+  while true; do
+    printf '\b%s' "${sp:i++%n:1}"
+    sleep 0.1
+  done
+}
 
+sanitycheck() {
+  : for git
+  if [ -z `type -p git` ]; then
+      printf -- '\e[31mNG\e[m\n'
+      printf -- "    You don\'t seem to have git installed.\n"
+      printf -- '    Install it: xcode-select --install\n'
+      exit 127
+  fi
+}
+
+printf -- "\n\e[34;1mDOTFILES\e[m \e[02m------------------------------\e[m\n"
+printf -- "  processing install processes...\n\n"
 #----------------------------------------------------------------------
 # Sanity Check
 #----------------------------------------------------------------------
+printf -- "  [0] Sanity Check : "
+spin & spinpid=$!
+sanitycheck
+sleep 5
+kill "$spinpid"
+printf -- "\bOK\n"
 
-: Sanity Check for git
-if [ -z `type -p git` ]; then
-    printf -- 'You don\'t seem to have git installed.\n;
-    printf -- 'Install it: xcode-select --install\n'
-    exit 127
-fi
-
+exit 0
 
 #----------------------------------------------------------------------
 # Main
 #----------------------------------------------------------------------
 
-printf -- 'Clonning the dotfiles repository... ';
+printf -- 'Clonning the dotfiles repository... \n';
 : Clone a repository of dotfiles
 if [ ! -d ${DOT_DIR} ]; then
   git clone https://github.com/rising1008/dotfiles.git ${DOT_DIR}
@@ -71,3 +94,4 @@ printf -- "[6] Set Up NeoVim.\n"
 
 printf -- "    finished install.\n"
 
+printf -- "\n\e[02m---------------------------------------\e[m\n"
