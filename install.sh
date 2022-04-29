@@ -30,13 +30,15 @@ spin() {
 }
 
 sanitycheck() {
+  echo "$1"
+  spin = $1
   : for git
   if [ -z `type -p git` ]; then
       printf -- '\e[31mNG\e[m\n'
       printf -- "    You don\'t seem to have git installed.\n"
       printf -- '    Install it: xcode-select --install\n'
-      exit 127
   fi
+  kill $spin
 }
 
 printf -- "\n\e[34;1mDOTFILES\e[m \e[02m------------------------------\e[m\n"
@@ -45,13 +47,12 @@ printf -- "  processing install processes...\n\n"
 # Sanity Check
 #----------------------------------------------------------------------
 printf -- "  [0] Sanity Check : "
-spin & spinpid=$!
-sanitycheck
-sleep 5
-kill "$spinpid"
-printf -- "\bOK\n"
+#spin & spinpid=$!
+#sanitycheck "$spinpid"
+#kill "$spinpid"
+#printf -- "\bOK\n"
 
-exit 0
+#exit 0
 
 #----------------------------------------------------------------------
 # Main

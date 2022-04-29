@@ -71,3 +71,10 @@ Zsh
 
 * https://dev.classmethod.jp/articles/zsh-zle-introduction/
 
+Nodebrew
+--------
+
+```
+$ nodebrew setup
+```
+
