@@ -78,3 +78,10 @@ Nodebrew
 $ nodebrew setup
 ```
 
+サブモジュールの管理
+--------------------
+
+```
+$ git submodule update --remote
+```
+

@@ -70,5 +70,6 @@ cask "google-japanese-ime"
 cask "kindle"
 cask "nosql-workbench"
 cask "mockoon"
+cask "nosql-workbench"
 
 cask "font-noto-sans-cjk-jp"
