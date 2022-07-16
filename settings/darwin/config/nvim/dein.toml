@@ -1,12 +1,4 @@
 [[plugins]]
-repo = 'Shougo/vimfiler'
-hook_add = '''
-  let g:vimfiler_as_default_explorer = 1
-  let g:vimfiler_safe_mode_by_default = 0
-  nnoremap <C-f> :VimFiler -split -simple -winwidth=35 -no-quit
-'''
-
-[[plugins]]
 repo = 'Shougo/unite.vim'
 
 [[plugins]]
@@ -111,6 +103,12 @@ repo = 'Xuyuanp/nerdtree-git-plugin'
 
 [[plugins]]
 repo = 'editorconfig/editorconfig-vim'
+
+[[plugins]]
+repo = 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
 
 [[plugins]]
 repo = 'PProvost/vim-ps1'

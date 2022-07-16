@@ -73,3 +73,4 @@ cask "mockoon"
 cask "nosql-workbench"
 
 cask "font-noto-sans-cjk-jp"
+cask "font-hack-nerd-font"
