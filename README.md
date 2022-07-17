@@ -2,6 +2,14 @@ dotfiles
 ========
 
 
+Install
+-------
+
+```
+$ bash -c "$(curl -fsSL dot.shinichihatano.net)"
+```
+
+
 Homebrew
 --------
 
