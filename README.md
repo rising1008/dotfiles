@@ -20,11 +20,16 @@ Homebrew
 $ brew search font
 ```
 
-fzf
----
+
+Manual Setup
+------------
+
+
+### fzf
+
 
 ```
-$ $(brew --prefix)/opt/fzf/install [.dotfiles]
+$ $(brew --prefix)/opt/fzf/install
 
 Downloading bin/fzf ...
   - Already exists
