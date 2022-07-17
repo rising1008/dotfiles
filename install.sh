@@ -60,7 +60,7 @@ application() {
   [ ! -z `type -p brew` ] || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   brew bundle --file ${TARGET_DIR}/settings/darwin/Brewfile
 
-  ln -snf ${TARGET_DIR}/settings/darwin/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
+  cp ${TARGET_DIR}/settings/darwin/com.googlecode.iterm2.plist ~/Library/Preferences/com.googlecode.iterm2.plist
   ln -snf ${TARGET_DIR}/settings/darwin/config/nvim ${HOME}/.config/nvim
   [ -d ${HOME}/.cache/dein/repos/github.com/Shougo/dein.vim ] || curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ${HOME}/installer.sh
   [ -d ${HOME}/.cache/dein/repos/github.com/Shougo/dein.vim ] || sh ${HOME}/installer.sh ${HOME}/.cache/dein
