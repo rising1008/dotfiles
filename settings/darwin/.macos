@@ -101,7 +101,7 @@ defaults write -g NSScrollViewRubberbanding -bool no
 defaults write com.apple.finder FinderSounds -bool no
 
 # ゴミ箱を空にする前の警告を無効化する
-#defaults write com.apple.finder WarnOnEmptyTrash -bool false
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
 
 # 未確認のアプリケーションを実行する際のダイアログを無効にする
 defaults write com.apple.LaunchServices LSQuarantine -bool false

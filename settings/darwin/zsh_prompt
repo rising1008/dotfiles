@@ -1,2 +1,2 @@
-PROMPT="%{${fg[blue]}%}%n@%m%{${reset_color}%} $ "
-RPROMPT="%{${fg[yellow]}%}[%c]%{${reset_color}%}"
+#PROMPT="%{${fg[blue]}%}%n@%m%{${reset_color}%} $ "
+#RPROMPT="%{${fg[yellow]}%}[%c]%{${reset_color}%}"

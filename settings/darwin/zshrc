@@ -1,5 +1,28 @@
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
 autoload -Uz colors
 colors
+
+# [zplug] ------------------------------ start.
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
+zplug 'zsh-users/zsh-autosuggestions'
+zplug 'romkatv/powerlevel10k, as:theme, depth:1'
+
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+zplug load
+# [zplug] ------------------------------ end.
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 for file in ~/.{zsh_prompt,zsh_aliases,zsh_functions}; do
@@ -53,3 +76,6 @@ function fzf-checkout-branch() {
 }
 zle     -N   fzf-checkout-branch
 bindkey "^b" fzf-checkout-branch
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

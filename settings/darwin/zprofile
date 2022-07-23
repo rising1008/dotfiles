@@ -1,6 +1,4 @@
 # If the shell is a login shell,
-# commands are read from /etc/zprofile and then $ZDOTDIR/.zprofile.
-#
 
 if [ -d "${HOME}/bin" ] ; then
   PATH="${HOME}/bin:${PATH}"
