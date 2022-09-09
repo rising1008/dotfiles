@@ -1,0 +1,67 @@
+[[plugins]]
+repo = 'preservim/tagbar'
+hook_add = '''
+    nmap <C-t> :TagbarToggle<CR>
+
+    let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+
+    set tags=.tags;$HOME
+
+    function! s:execute_ctags() abort
+      " 探すタグファイル名
+      let tag_name = '.tags'
+      " ディレクトリを遡り、タグファイルを探し、パス取得
+      let tags_path = findfile(tag_name, '.;')
+      " タグファイルパスが見つからなかった場合
+      if tags_path ==# ''
+        return
+      endif
+
+      " タグファイルのディレクトリパスを取得
+      " `:p:h`の部分は、:h filename-modifiersで確認
+      let tags_dirpath = fnamemodify(tags_path, ':p:h')
+      " 見つかったタグファイルのディレクトリに移動して、ctagsをバックグラウンド実行（エラー出力破棄）
+      execute 'silent !cd' tags_dirpath '&& ctags -R -f' tag_name '2> /dev/null &'
+    endfunction
+
+    augroup ctags
+      autocmd!
+      autocmd BufWritePost * call s:execute_ctags()
+    augroup END
+'''
+
+[[plugins]]
+repo = 'tpope/vim-markdown'
+on_ft = ['markdown']
+hook_add = '''
+  autocmd BufRead,BufNewFile *.mkd,*.md  set filetype=markdown
+  let g:vim_markdown_folding_disabled=1
+'''
+
+[[plugins]]
+repo = 'previm/previm'
+hook_add = '''
+  let g:previm_open_cmd = 'open -a Google\ Chrome'
+'''
+
+[[plugins]]
+repo = 'leafgarland/typescript-vim'
+on_ft = ['typescript']
+hook_add = '''
+  autocmd BufRead,BufNewFile *.ts set filetype=typescript
+  let g:typescript_indent_disable = 1
+'''
+
+[[plugins]]
+repo = 'ianks/vim-tsx'
+on_ft = ['typescript']
+hook_add = '''
+  autocmd BufRead,BufNewFile *.tsx set filetype=typescript
+'''
+
+[[plugins]]
+repo = 'PProvost/vim-ps1'
+hook_add = '''
+  let g:ps1_nofold_blocks = 1
+  let g:ps1_nofold_sig = 1
+'''
