@@ -88,6 +88,10 @@ setup_iterms () {
   cp "${SCRIPT_DIR}/settings/darwin/com.googlecode.iterm2.plist" "${HOME}/Library/Preferences/com.googlecode.iterm2.plist"
 }
 
+setup_git () {
+  ln -snf "${SCRIPT_DIR}/settings/git/.gitconfig" "${HOME}"
+}
+
 : --------------------------------------------------
 :  Main
 : --------------------------------------------------
@@ -109,6 +113,9 @@ setup_zsh
 
 printf -- '  Set up iTerms...\n';
 setup_iterms "${SCRIPT_DIR}" "${BACKUP_DIR}"
+
+printf -- '  Set up git...\n';
+setup_git
 
 printf -- '  Set up VS Code...\n';
 #setup_vscode "${BACKUP_DIR}"
