@@ -38,4 +38,3 @@ bindkey -v
 
 # set variables
 export HOMEBREW_GITHUB_API_TOKEN=
-export PATH=$HOME/.dotfiles/bin:$PATH
