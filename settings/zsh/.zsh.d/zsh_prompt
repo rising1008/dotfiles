@@ -1,0 +1,47 @@
+autoload -Uz vcs_info
+autoload -Uz add-zsh-hook
+
+# 変数展開
+setopt PROMPT_SUBST
+# コマンド実行後に右プンプトを消す
+setopt TRANSIENT_RPROMPT
+
+# formats
+zstyle ':vcs_info:git:*' formats ' %b'
+
+add_newline() {
+  if [[ -z $PS1_NEWLINE_LOGIN ]]; then
+    PS1_NEWLINE_LOGIN=true
+  else
+    printf '\n'
+  fi
+}
+
+
+# プロンプトを表示する直前に実行される
+precmd() {
+  vcs_info
+  # add_newline
+}
+
+# PROMPT='${PWD/#$HOME/~} ${vcs_info_msg_0_}  '
+current() {
+MSG=${vcs_info_msg_0_}
+CNT=$(echo ${MSG} | wc -m )
+COL=$(( COLUMNS - 7 - ${CNT}))
+CURRENT_DIR="$(pwd)"
+DIR=${CURRENT_DIR##*/}
+MSG=$(echo "${vcs_info_msg_0_} \e[$((${COLUMNS} - 15 - ${#DIR}))G %F{004}%f%K{004}%F{250}  ${DIR}   %T %f%k")
+PROMPT="╭─  ${MSG}
+╰─%F{003}%f "
+}
+add-zsh-hook precmd current
+
+update() {
+PROMPT=" %(?.%F{084}.%F{197})%f "
+zle .reset-prompt
+zle .accept-line
+}
+
+zle -N accept-line update
+#RPROMPT="%F{004}%f%K{004}%F{250}  %c   %T %f%k"

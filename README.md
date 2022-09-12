@@ -75,6 +75,7 @@ Python 3をインストール
 ```
 $ pyenv install --list # 利用可能な3系を確認
 $ pyenv install 3.x.x
+$ pip install ~/.dotfiles/settings/nvim/requirements
 ```
 
 対象のライブラリは、requirements.txtに記載の通りです。

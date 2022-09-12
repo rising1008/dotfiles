@@ -1,0 +1,10 @@
+export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+export FZF_CTRL_T_COMMAND='rg --files --hidden --glob "!.git"'
+export FZF_DEFAULT_OPTS='--height 50% --reverse --border --preview "bat  --color=always --style=header,grid --line-range :100 {}"'
+# ディレクトリ検索で選択した項目の配下の構成をプレビューに表示する
+# Esc + c (on OS X)
+export FZF_ALT_C_OPTS='--preview "tree -a -C {} | head -200"'
+# ファイル検索で選択した項目の中身をプレビューに表示する
+# set -x FZF_CTRL_T_OPTS  "--preview 'head -100 {}'"
+export FZF_CTRL_T_OPTS='--height 80% --reverse --border --preview "bat  --color=always --style=header,grid --line-range :100 {}"'
+export FZF_CTRL_R_OPTS='--height 50% --reverse'
