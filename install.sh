@@ -51,8 +51,8 @@ setup_neovim () {
   fi
   : setup configuration files
   if [ ! -d "${HOME}/.config/nvim" ]; then
-    mkdir -p "${HOME}/.config/nvim"
-    ln -snf "${SCRIPT_DIR}"/settings/nvim "${HOME}/.config/nvim"
+    mkdir -p "${HOME}/.config
+    ln -snf "${SCRIPT_DIR}"/settings/nvim "${HOME}/.config"
   fi
 }
 
@@ -100,4 +100,4 @@ printf -- '  Set up VS Code...\n';
 #setup_vscode "${BACKUP_DIR}"
 
 printf -- '  Set up iTerms...\n';
-#setup_iterms "${SCRIPT_DIR}" "${BACKUP_DIR}"
+setup_iterms "${SCRIPT_DIR}" "${BACKUP_DIR}"
