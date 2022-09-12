@@ -9,6 +9,8 @@
 
   - [Git](https://git-scm.com/)
     - OS Xの場合は、Xcode command line tools で入れてしまうのが手っ取り早いかも。
+  - Sign in own Apple ID
+  - SIgn in App Store
 
 ```
 [Xcode command line tools インストール]

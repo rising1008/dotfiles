@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -e
-
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE:-$0}")" && pwd)"
 
 source "${SCRIPT_DIR}/lib/utils.sh"
@@ -13,6 +11,7 @@ VERSION="0.1.0"
 OS_TYPE="$(uname -s)"
 TIMESTAMP=$(date  "+%Y%m%d-%H%M%S")
 BACKUP_DIR="${HOME}/.backup/${TIMESTAMP}"
+ORIGIN_BACKUP_DIR="${HOME}/.backup/origin"
 
 : --------------------------------------------------
 :  Functions
@@ -28,8 +27,8 @@ banner() {
 }
 
 init () {
-  local BACKUP_DIR=$1
 
+  [ -d "${ORIGIN_BACKUP_DIR}" ] || mkdir -p "${ORIGIN_BACKUP_DIR}"
   [ -d "${BACKUP_DIR}" ] || mkdir -p "${BACKUP_DIR}"
 }
 
@@ -38,7 +37,7 @@ install_homebrew () {
 }
 
 install_packages () {
-  brew bundle --file "${TARGET_DIR}/settings/darwin/Brewfile"
+  brew bundle --file "${SCRIPT_DIR}/settings/darwin/Brewfile"
   : install imgcat command
   [ -f "${SCRIPT_DIR}/bin/imgcat" ] || curl https://raw.githubusercontent.com/gnachman/iTerm2/master/tests/imgcat > "${SCRIPT_DIR}/bin/imgcat"
   [ -f "${SCRIPT_DIR}/bin/imgcat" ] && chmod 755 "${SCRIPT_DIR}/bin/imgcat"
@@ -48,6 +47,7 @@ setup_neovim () {
   [ -d "${HOME}"/.cache/dein/repos/github.com/Shougo/dein.vim ] || curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > "${HOME}"/installer.sh
   [ -d "${HOME}"/.cache/dein/repos/github.com/Shougo/dein.vim ] || sh "${HOME}"/installer.sh "${HOME}"/.cache/dein
   [ -f "${HOME}/installer.sh" ] && rm "${HOME}/install.sh"
+  [ -d "${HOME}/.config/nvim ]" || mkdir -p "${HOME}/.config/nvim"
 }
 
 setup_vscode () {
@@ -65,7 +65,11 @@ setup_iterms () {
   local BACKUP_DIR=$2
 
   : backup
-  cp "${HOME}/Library/Preferences/com.googlecode.iterm2.plist" "${BACKUP_DIR}/com.googlecode.iterm2.plist"
+  if [ -f "${ORIGIN_BACKUP_DIR}/com.googlecode.iterm2.plist" ]; then
+    cp "${HOME}/Library/Preferences/com.googlecode.iterm2.plist" "${BACKUP_DIR}/com.googlecode.iterm2.plist"
+  else
+    cp "${HOME}/Library/Preferences/com.googlecode.iterm2.plist" "${ORIGIN_BACKUP_DIR}/com.googlecode.iterm2.plist"
+  fi
   : setup
   cp "${SCRIPT_DIR}/settings/darwin/com.googlecode.iterm2.plist" "${HOME}/Library/Preferences/com.googlecode.iterm2.plist"
 }
@@ -75,7 +79,7 @@ setup_iterms () {
 : --------------------------------------------------
 banner "${VERSION}" "${OS_TYPE}"
 
-init "${BACKUP_DIR}"
+init
 
 printf -- '  Install homebrew...\n';
 install_homebrew
@@ -87,7 +91,7 @@ printf -- '  Set up neovim...\n';
 setup_neovim
 
 printf -- '  Set up VS Code...\n';
-setup_vscode "${BACKUP_DIR}"
+#setup_vscode "${BACKUP_DIR}"
 
 printf -- '  Set up iTerms...\n';
-setup_iterms "${SCRIPT_DIR}" "${BACKUP_DIR}"
+#setup_iterms "${SCRIPT_DIR}" "${BACKUP_DIR}"
