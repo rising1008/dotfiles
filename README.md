@@ -71,6 +71,12 @@ For more information, see: https://github.com/junegunn/fzf
 
 #### Python
 
+Python 3をインストール
+```
+$ pyenv install --list # 利用可能な3系を確認
+$ pyenv install 3.x.x
+```
+
 対象のライブラリは、requirements.txtに記載の通りです。
 
   - [cfn-lint](https://github.com/aws-cloudformation/cfn-lint)

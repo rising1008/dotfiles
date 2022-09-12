@@ -50,9 +50,9 @@ setup_neovim () {
     rm "${HOME}/installer.sh"
   fi
   : setup configuration files
-  if [ ! -d "${HOME}/.config/nvim" ]; then
-    mkdir -p "${HOME}/.config
-    ln -snf "${SCRIPT_DIR}"/settings/nvim "${HOME}/.config"
+  if [ ! -d "${HOME}/.config" ]; then
+    mkdir -p "${HOME}/.config"
+    ln -snf "${SCRIPT_DIR}/settings/nvim" "${HOME}/.config"
   fi
 }
 
