@@ -27,7 +27,6 @@ banner() {
 }
 
 init () {
-
   [ -d "${ORIGIN_BACKUP_DIR}" ] || mkdir -p "${ORIGIN_BACKUP_DIR}"
   [ -d "${BACKUP_DIR}" ] || mkdir -p "${BACKUP_DIR}"
 }
@@ -44,10 +43,17 @@ install_packages () {
 }
 
 setup_neovim () {
-  [ -d "${HOME}"/.cache/dein/repos/github.com/Shougo/dein.vim ] || curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > "${HOME}"/installer.sh
-  [ -d "${HOME}"/.cache/dein/repos/github.com/Shougo/dein.vim ] || sh "${HOME}"/installer.sh "${HOME}"/.cache/dein
-  [ -f "${HOME}/installer.sh" ] && rm "${HOME}/install.sh"
-  [ -d "${HOME}/.config/nvim ]" || mkdir -p "${HOME}/.config/nvim"
+  : install dein.vim
+  if [ ! -d "${HOME}"/.cache/dein/repos/github.com/Shougo/dein.vim ]; then
+    curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > "${HOME}"/installer.sh
+    sh "${HOME}"/installer.sh "${HOME}"/.cache/dein
+    rm "${HOME}/install.sh"
+  fi
+  : setup configuration files
+  if [ ! -d "${HOME}/.config/nvim" ]; then
+    mkdir -p "${HOME}/.config/nvim"
+    ln -snf "${SCRIPT_DIR}"/settings/nvim "${HOME}/.config/nvim"
+  fi
 }
 
 setup_vscode () {

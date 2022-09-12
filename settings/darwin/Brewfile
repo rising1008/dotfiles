@@ -81,4 +81,3 @@ cask "font-hack-nerd-font"
 
 mas "Xcode", id: 497799835
 mas "Hex Fiend", id: 1342896380
-mas "MenubarX", id: 1575588022
