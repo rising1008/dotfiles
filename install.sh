@@ -47,7 +47,7 @@ setup_neovim () {
   if [ ! -d "${HOME}"/.cache/dein/repos/github.com/Shougo/dein.vim ]; then
     curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > "${HOME}"/installer.sh
     sh "${HOME}"/installer.sh "${HOME}"/.cache/dein
-    rm "${HOME}/install.sh"
+    rm "${HOME}/installer.sh"
   fi
   : setup configuration files
   if [ ! -d "${HOME}/.config/nvim" ]; then

@@ -25,6 +25,13 @@ $ bash -c "$(curl -fsSL dot.shinichihatano.net)"
 
 ## Post-Installation
 
+### Xcode license
+I have to agree to the Xcode license.
+
+```
+$ sudo xodebuild -license accept
+```
+
 ### fzf
 
 ```
