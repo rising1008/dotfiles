@@ -56,6 +56,14 @@ setup_neovim () {
   fi
 }
 
+setup_zsh () {
+  [ ! -f "${HOME}/.zshrc" ] && ln -snf "${SCRIPT_DIR}/settings/zsh/.zshrc" "${HOME}"
+  [ ! -f "${HOME}/.zshenv" ] && ln -snf "${SCRIPT_DIR}/settings/zsh/.zshenv" "${HOME}"
+  if [ ! -d "${HOME}/.zsh.d" ]; then
+    ln -snf "${SCRIPT_DIR}/settings/zsh/.zsh.d" "${HOME}"
+  fi
+}
+
 setup_vscode () {
   local BACKUP_DIR=$1
 
@@ -96,8 +104,11 @@ install_packages
 printf -- '  Set up neovim...\n';
 setup_neovim
 
-printf -- '  Set up VS Code...\n';
-#setup_vscode "${BACKUP_DIR}"
+printf -- '  Set up zsh...\n';
+setup_zsh
 
 printf -- '  Set up iTerms...\n';
 setup_iterms "${SCRIPT_DIR}" "${BACKUP_DIR}"
+
+printf -- '  Set up VS Code...\n';
+#setup_vscode "${BACKUP_DIR}"
