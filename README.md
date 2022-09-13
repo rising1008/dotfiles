@@ -1,4 +1,4 @@
-# s-hata's dotfiles
+# rising's dotfiles
 
 > Warning
 >

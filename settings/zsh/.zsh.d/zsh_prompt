@@ -1,3 +1,10 @@
+##################################################
+# PROMPT
+# PROMPT2
+# SPROMPT
+# RPROMPT
+##################################################
+
 autoload -Uz vcs_info
 autoload -Uz add-zsh-hook
 
@@ -30,7 +37,7 @@ CNT=$(echo ${MSG} | wc -m )
 COL=$(( COLUMNS - 7 - ${CNT}))
 CURRENT_DIR="$(pwd)"
 DIR=${CURRENT_DIR##*/}
-MSG=$(echo "%K{244}%F{254}    ${DIR} ${vcs_info_msg_0_} %f%k%F{244}%f \e[$((${COLUMNS} - 10))G %F{004}%f%K{004}%F{250}  %T %f%k")
+MSG=$(echo "%F{239}%f%K{239}%F{254}   %f%F{012} ${DIR} %f%F{084}${vcs_info_msg_0_} %f%k%F{239}%f \e[$((${COLUMNS} - 10))G %F{004}%f%K{004}%F{250}  %T %f%k")
 PROMPT="╭─ ${MSG}
 ╰─%F{003}%f "
 }

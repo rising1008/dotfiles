@@ -25,8 +25,10 @@ zstyle ':completion:*' list-colors "${LS_COLORS}"
 # ------------------------------
 # ビープ音 無効化
 setopt nobeep
-# ワイルドカード展開を使用する
+# ワイルドカード展開を使用
 setopt extended_glob
+# 入力ミスの際に候補を表示
+setopt correct
 
 #zstyle ":completion:*:commands" rehash 1
 
