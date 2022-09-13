@@ -93,6 +93,10 @@ $ node install-binary v16.x.x
 $ node use v16.x.x
 ```
 
+## Usages
+
+### Submodules
+
 ## What's in it?
 
   - NeoVim
