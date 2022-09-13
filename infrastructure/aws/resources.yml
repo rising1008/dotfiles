@@ -1,0 +1,80 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: "Web Hosting Server Resources"
+
+Parameters:
+  HostedZoneName:
+    Type: String
+
+Resources:
+  HostedZone:
+    Type: AWS::Route53::HostedZone
+    Properties:
+      Name: !Sub "${HostedZoneName}"
+      HostedZoneTags:
+        - Key: "Created By"
+          Value: !Sub "CloudFormation - ${AWS::StackName}"
+
+  WebHostingServer:
+    Type: AWS::S3::Bucket
+    DependsOn: HostedZone
+    DeletionPolicy: Retain
+    Properties:
+      BucketName: !Sub "dot.${HostedZoneName}"
+      AccessControl: Private
+      VersioningConfiguration:
+        Status: Suspended
+      WebsiteConfiguration: 
+        IndexDocument: "index.html"
+        RoutingRules:
+          - RedirectRule:
+              Protocol: https
+              HostName: "raw.githubusercontent.com"
+              ReplaceKeyWith: "rising1008/dotfiles/main/install.sh"
+      LoggingConfiguration:
+        DestinationBucketName: !Ref AccessLogStore
+        LogFilePrefix: !Sub "s3/${AWS::StackName}"
+      Tags:
+        - Key: "Created By"
+          Value: !Sub "CloudFormation - ${AWS::StackName}"
+
+  AccessLogStore:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    Properties:
+      AccessControl: LogDeliveryWrite
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      LifecycleConfiguration:
+        Rules:
+          - Id: AutoDelete
+            Status: Enabled
+            ExpirationInDays: 10
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      Tags:
+        - Key: "Created By"
+          Value: !Sub "CloudFormation - ${AWS::StackName}"
+
+  WebHostingServerAlias:
+    Type: AWS::Route53::RecordSetGroup
+    DependsOn: WebHostingServer
+    Properties:
+      HostedZoneId: !Ref HostedZone
+      RecordSets:
+        - Name: !Sub "dot.${HostedZoneName}."
+          ResourceRecords:
+            - !Sub "${WebHostingServer}.s3-website-${AWS::Region}.amazonaws.com"
+          Type: CNAME
+          TTL: 300
+Outputs:
+  Name:
+    Value: !Ref WebHostingServer
+    Description: "Name of the Amazon S3 bucket for web hosting server"
+  URL:
+    Value: !GetAtt [ WebHostingServer, WebsiteURL ]
+    Description: "URL for web hosting server"

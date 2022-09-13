@@ -52,6 +52,7 @@ brew "deno"
 brew "zplug"
 brew "universal-ctags"
 brew "lazygit"
+brew "graphviz"
 
 cask "vlc"
 cask "vagrant"
