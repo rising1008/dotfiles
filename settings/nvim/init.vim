@@ -35,7 +35,7 @@ set splitright
 set mouse=a
 
 " leader key 設定
-let mapleader = "\<Space>"
+" let mapleader = "\<Space>"
 
 " Set Up Pre-Process
 " see: https://wiredool.hatenadiary.org/entry/20120618/1340019962

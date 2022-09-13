@@ -83,6 +83,16 @@ $ pip install -r ~/.dotfiles/settings/nvim/requirements
   - [cfn-lint](https://github.com/aws-cloudformation/cfn-lint)
   - [neovim](https://pypi.org/project/neovim/)
 
+#### Node.js
+
+Node.jsをインストール
+
+```
+$ node ls-remote
+$ node install-binary v16.x.x
+$ node use v16.x.x
+```
+
 ## What's in it?
 
   - NeoVim
