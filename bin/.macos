@@ -7,29 +7,37 @@ sudo nvram SystemAudioVolume=" "
 defaults write com.apple.CrashReporter DialogType -string "none"
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.CrashReporter DialogType none
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-defaults write com.apple.CrashReporter DialogType none
 
 : 全てのファイルの拡張子を表示
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+: 未確認のアプリケーションを実行する際のダイアログを無効化
+defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 : --------------------------------------------------
 : for Finder
 : 名前で並べ替えを選択時にディレクトリを前にソート
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
 : 不可視ファイルを表示
-defaults write com.apple.finder AppleShowAllFiles true && killall Finder
+defaults write com.apple.finder AppleShowAllFiles true
+: Quick Look テキスト選択 有効化
 defaults write com.apple.finder QLEnableTextSelection -bool true
+: タブバーを表示
 defaults write com.apple.finder ShowTabView -bool true
+: Finder 終了メニュー表示
 defaults write com.apple.Finder QuitMenuItem -bool true
+
 killall Finder
 
 : --------------------------------------------------
 : for Dock
+: 表示されるまでの待ち時間を無効化
+defaults write com.apple.dock autohide-delay -float 0
 : Dockの跳ねるアクションを無効化
 defaults write com.apple.dock no-bouncing -bool true
 defaults write com.apple.dock autohide -bool true
+
 killall Dock
+
 : --------------------------------------------------
 : for Safari
 : ファイルのダウンロード後に自動でファイルを開くのを無効化
@@ -38,6 +46,7 @@ defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
 defaults write com.apple.Safari IncludeDevelopMenu -bool true
 defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+: コンテキストメニューに Web インスペクタを追加
 defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
 : アドレスバーに完全な URL を表示
 defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
@@ -46,3 +55,8 @@ defaults write com.apple.Safari ShowStatusBar -bool true
 : 検索クエリを Apple へ送信しない
 defaults write com.apple.Safari SuppressSearchSuggestions -bool true
 defaults write com.apple.Safari UniversalSearchEnabled -bool false
+
+: --------------------------------------------------
+: for スクリーンショット
+: 保存形式 PNG設定
+defaults write com.apple.screencapture type -string "png"

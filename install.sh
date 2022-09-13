@@ -92,6 +92,10 @@ setup_git () {
   ln -snf "${SCRIPT_DIR}/settings/git/.gitconfig" "${HOME}"
 }
 
+setup_macos () {
+  ${SCRIPT_DIR}/bin/.macos
+}
+
 : --------------------------------------------------
 :  Main
 : --------------------------------------------------
@@ -119,3 +123,6 @@ setup_git
 
 printf -- '  Set up VS Code...\n';
 #setup_vscode "${BACKUP_DIR}"
+
+printf -- '  Set up Mac OS...\n';
+setup_macos
