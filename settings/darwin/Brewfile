@@ -81,5 +81,5 @@ cask "font-noto-sans-cjk-jp"
 cask "font-hack-nerd-font"
 cask "fliqlo"
 
-mas "Xcode", id: 497799835
-mas "Hex Fiend", id: 1342896380
+#mas "Xcode", id: 497799835
+#mas "Hex Fiend", id: 1342896380

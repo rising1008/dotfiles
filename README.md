@@ -127,3 +127,6 @@ dotfiles
 └── README.md
 ```
 
+## References
+
+  - [zsh日本語マニュアル](http://www.ayu.ics.keio.ac.jp/~mukai/translate/zshoptions.html)
