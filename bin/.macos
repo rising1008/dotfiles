@@ -12,6 +12,14 @@ defaults write com.apple.CrashReporter DialogType none
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 : 未確認のアプリケーションを実行する際のダイアログを無効化
 defaults write com.apple.LaunchServices LSQuarantine -bool false
+: 位置情報に基づくタイムぞーんの自動切り替えを無効化
+sudo defaults write /Library/Preferences/com.apple.timezone.auto Active -bool false
+: 通知センター停止
+: launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
+: メニューバー自動で隠すを有効化
+defaults write -globalDomain _HIHideMenuBar -bool true
+: background 画像設定
+osascript -e 'tell application "Finder" to set desktop picture to POSIX file "/System/Library/Desktop Pictures/Solid Colors/Space Gray Pro.png"'
 
 : --------------------------------------------------
 : for Finder
