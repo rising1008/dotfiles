@@ -234,45 +234,43 @@ hook_add = '''
     augroup END
 '''
 
+# ddc.vimの依存
 [[plugins]]
 repo = 'vim-denops/denops.vim'
-
+# ddc.vimのsource
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
-
+# ddc.vimのsource
 [[plugins]]
 repo = 'Shougo/ddc-around'
-
+# ddc.vimのsource
 [[plugins]]
 repo = 'LumaKernel/ddc-file'
-
+# ポップアップウィンドウ
 [[plugins]]
 repo = 'Shougo/pum.vim'
-
+# ddc.vimのfilter
 [[plugins]]
 repo = 'Shougo/ddc-matcher_head'
-
+# ddc.vimのfilter
 [[plugins]]
 repo = 'Shougo/ddc-sorter_rank'
-
+# ddc.vimのfilter
 [[plugins]]
 repo = 'Shougo/ddc-converter_remove_overlap'
 
 [[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-hook_add = '''
-'''
-
-[[plugins]]
 repo = 'mattn/vim-lsp-settings'
+depends = ['vim-lsp']
 hook_add = '''
   augroup LspEFM
     au!
     autocmd User lsp_setup call lsp#register_server({
         \ 'name': 'efm-langserver',
         \ 'cmd': {server_info->['efm-langserver', '-logfile='.$HOME.'/.config/efm-langserver/efm-langserver.log']},
-        \ 'allowlist': ['yaml.cloudformation'],
+        \ 'allowlist': ['yaml.cloudformation', 'typescript'],
         \ })
+    autocmd BufWritePre *.ts,*.tsx call execute('LspDocumentFormatSync --server=efm-langserver')
   augroup END
 '''
 

@@ -1,0 +1,31 @@
+version: 2
+log-file: ${HOME}/.config/efm-langserver/output.log
+log-level: 10
+root-markers:
+  - .git/
+tools:
+  cfn-lint: &cfn-lint
+    lint-command: 'cfn-lint -f pretty -t ${INPUT}'
+    lint-stdin: true
+    lint-formats:
+      - '%l:%c: %m'
+  javascript-eslint: &javascript-eslint
+    lint-command: './node_modules/.bin/eslint -f visualstudio --stdin --stdin-filename ${INPUT}'
+    lint-ignore-exit-code: true
+    lint-stdin: true
+    lint-formats:
+      - "%f(%l,%c): %tarning %m"
+      - "%f(%l,%c): %rror %m"
+    root-markers:
+      - node_modules/
+  typescript-prettier: &typescript-prettier
+    format-command: './node_modules/.bin/prettier --config .prettierrc.yml --parser typescript --stdin-filepath ${INPUT}'
+    format-stdin: true
+    root-markers:
+      - node_modules/
+languages:
+  yaml.cloudformation:
+    - <<: *cfn-lint
+  typescript:
+    - <<: *javascript-eslint
+    - <<: *typescript-prettier

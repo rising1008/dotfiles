@@ -53,6 +53,7 @@ setup_neovim () {
   if [ ! -d "${HOME}/.config" ]; then
     mkdir -p "${HOME}/.config"
     ln -snf "${SCRIPT_DIR}/settings/nvim" "${HOME}/.config"
+    ln -snf "${SCRIPT_DIR}/settings/efm-langserver" "${HOME}/.config"
   fi
 }
 
