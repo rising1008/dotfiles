@@ -65,3 +65,88 @@ hook_add = '''
   let g:ps1_nofold_blocks = 1
   let g:ps1_nofold_sig = 1
 '''
+
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+# ddc.vimの依存
+[[plugins]]
+repo = 'vim-denops/denops.vim'
+# ddc.vimのsource
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+# ddc.vimのsource
+[[plugins]]
+repo = 'Shougo/ddc-around'
+# ddc.vimのsource
+[[plugins]]
+repo = 'LumaKernel/ddc-file'
+# ポップアップウィンドウ
+[[plugins]]
+repo = 'Shougo/pum.vim'
+# ddc.vimのfilter
+[[plugins]]
+repo = 'Shougo/ddc-matcher_head'
+# ddc.vimのfilter
+[[plugins]]
+repo = 'Shougo/ddc-sorter_rank'
+# ddc.vimのfilter
+[[plugins]]
+repo = 'Shougo/ddc-converter_remove_overlap'
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+depends = ['vim-lsp']
+hook_add = '''
+let g:lsp_settings = {
+    \ 'efm-langserver': {
+        \ 'disabled': v:false
+    \ },
+\ }
+'''
+#hook_add = '''
+#  augroup LspEFM
+#    au!
+#    autocmd User lsp_setup call lsp#register_server({
+#        \ 'name': 'efm-langserver',
+#        \ 'cmd': {server_info->['efm-langserver', '-logfile='.$HOME.'/.config/efm-langserver/efm-langserver.log']},
+#        \ 'allowlist': ['yaml.cloudformation', 'typescript'],
+#        \ })
+#    autocmd BufWritePre *.ts,*.tsx call execute('LspDocumentFormatSync --server=efm-langserver')
+#  augroup END
+#'''
+[[plugins]]
+repo = 'Shougo/ddc.vim'
+on_event = 'InsertEnter'
+depends = ['denops.vim']
+hook_add = '''
+    call ddc#custom#patch_global('completionMenu', 'pum.vim')
+    call ddc#custom#patch_global('sources', [
+        \ 'around',
+        \ 'vim-lsp',
+        \ 'file'
+        \ ])
+    call ddc#custom#patch_global('sourceOptions', {
+        \ '_': {
+        \   'matchers': ['matcher_head'],
+        \   'sorters': ['sorter_rank'],
+        \   'converters': ['converter_remove_overlap'],
+        \ },
+        \ 'around': {'mark': 'Around'},
+        \ 'vim-lsp': {
+        \   'mark': 'LSP', 
+        \   'matchers': ['matcher_head'],
+        \   'forceCompletionPattern': '\.|:|->|"\w+/*'
+        \ },
+        \ 'file': {
+        \   'mark': 'file',
+        \   'isVolatile': v:true, 
+        \   'forceCompletionPattern': '\S/\S*'
+        \ }})
+    call ddc#enable()
+    inoremap <Tab> <Cmd>call pum#map#insert_relative(+1)<CR>
+    inoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
+'''
+

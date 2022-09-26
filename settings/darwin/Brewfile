@@ -53,6 +53,7 @@ brew "zplug"
 brew "universal-ctags"
 brew "lazygit"
 brew "graphviz"
+brew "efm-langserver"
 
 cask "vlc"
 cask "vagrant"
