@@ -1,6 +1,7 @@
 tap "homebrew/cask"
 tap "aws/tap"
 tap "homebrew/cask-fonts"
+tap "AdoptOpenJDK/openjdk"
 
 brew "autoconf"
 brew "libevent"
@@ -81,6 +82,8 @@ cask "blender"
 cask "font-noto-sans-cjk-jp"
 cask "font-hack-nerd-font"
 cask "fliqlo"
+cask "adoptopenjdk16"
+cask "intellij-idea-ce"
 
 #mas "Xcode", id: 497799835
 #mas "Hex Fiend", id: 1342896380
