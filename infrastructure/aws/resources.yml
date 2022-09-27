@@ -18,6 +18,7 @@ Resources:
     Type: AWS::S3::Bucket
     DependsOn: HostedZone
     DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
     Properties:
       BucketName: !Sub "dot.${HostedZoneName}"
       AccessControl: Private
@@ -40,6 +41,7 @@ Resources:
   AccessLogStore:
     Type: AWS::S3::Bucket
     DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
     Properties:
       AccessControl: LogDeliveryWrite
       BucketEncryption:
