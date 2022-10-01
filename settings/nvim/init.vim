@@ -43,6 +43,7 @@ Plug 'mattn/efm-langserver'
 Plug 'voldikss/vim-floaterm'
 Plug 'tpope/vim-commentary'
 Plug 'cohama/lexima.vim'
+Plug 'preservim/tagbar'
 call plug#end()
 
 let g:defx_icons_enable_syntax_highlight = 0
@@ -249,6 +250,30 @@ call ddc#custom#patch_global('sourceOptions', {
  \ }})
 call ddc#enable()
 
+let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+set tags=.tags;$HOME
+function! s:execute_ctags() abort
+  " 探すタグファイル名
+  let tag_name = '.tags'
+  " ディレクトリを遡り、タグファイルを探し、パス取得
+  let tags_path = findfile(tag_name, '.;')
+  " タグファイルパスが見つからなかった場合
+  if tags_path ==# ''
+    return
+  endif
+
+  " タグファイルのディレクトリパスを取得
+  " `:p:h`の部分は、:h filename-modifiersで確認
+  let tags_dirpath = fnamemodify(tags_path, ':p:h')
+  " 見つかったタグファイルのディレクトリに移動して、ctagsをバックグラウンド実行（エラー出力破棄）
+  execute 'silent !cd' tags_dirpath '&& ctags -R -f' tag_name '2> /dev/null &'
+endfunction
+
+augroup ctags
+  autocmd!
+  autocmd BufWritePost * call s:execute_ctags()
+augroup END
+
 let g:floaterm_title = 'terminal: [$1/$2]'
 let g:floaterm_width = 0.7
 let g:floaterm_height = 0.7
@@ -260,6 +285,9 @@ tnoremap <silent> <leader>t] <C-\><C-n>:FloatermNext<CR>
 tnoremap <silent> <leader>t[ <C-\><C-n>:FloatermPrev<CR>
 tnoremap <silent> <leader>tt <C-\><C-n>:FloatermToggle<CR>
 tnoremap <silent> <leader>tc <C-\><C-n>:FloatermKill!<CR>
+
+nmap <C-t> :TagbarToggle<CR>
+
 augroup vimrc_floaterm
     autocmd!
     autocmd QuitPre * FloatermKill!
@@ -277,5 +305,12 @@ nnoremap <C-n> :<C-u>setlocal relativenumber!<CR>
 " Defxのトグル
 nnoremap <silent> <C-f> :<C-u> Defx <CR>
 
-inoremap <Tab> <Cmd>call pum#map#insert_relative(+1)<CR>
+inoremap <silent><expr> <TAB>
+      \ pum#visible() ? '<Cmd>call pum#map#insert_relative(+1)<CR>' :
+      \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
+      \ '<TAB>' : ddc#manual_complete()
 inoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
+inoremap <C-n>   <Cmd>call pum#map#select_relative(+1)<CR>
+inoremap <C-p>   <Cmd>call pum#map#select_relative(-1)<CR>
+inoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
+inoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
