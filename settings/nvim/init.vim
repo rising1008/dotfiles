@@ -34,11 +34,12 @@ Plug 'LumaKernel/ddc-file'
 Plug 'Shougo/ddc-matcher_head'
 Plug 'Shougo/ddc-sorter_rank'
 Plug 'Shougo/ddc-converter_remove_overlap'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
+"Plug 'prabirshrestha/async.vim'
+"Plug 'prabirshrestha/asyncomplete.vim'
+"Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
+Plug 'shun/ddc-vim-lsp'
 Plug 'mattn/efm-langserver'
 Plug 'voldikss/vim-floaterm'
 Plug 'tpope/vim-commentary'
@@ -215,6 +216,10 @@ let g:lightline.tab = {
 "        \ 'disabled': v:false
 "    \ },
 "\ }
+
+" 警告をステータスラインに表示
+let g:lsp_diagnostics_echo_cursor = 1
+
 augroup LspEFM
   au!
   autocmd User lsp_setup call lsp#register_server({

@@ -6,6 +6,7 @@ root-markers:
 tools:
   cfn-lint: &cfn-lint
     lint-command: 'cfn-lint -f pretty -t ${INPUT}'
+    lint-ignore-exit-code: true
     lint-stdin: true
     lint-formats:
       - '%l:%c: %m'
