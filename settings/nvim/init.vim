@@ -45,6 +45,8 @@ Plug 'voldikss/vim-floaterm'
 Plug 'tpope/vim-commentary'
 Plug 'cohama/lexima.vim'
 Plug 'preservim/tagbar'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 call plug#end()
 
 let g:defx_icons_enable_syntax_highlight = 0
@@ -255,6 +257,8 @@ call ddc#custom#patch_global('sourceOptions', {
  \ }})
 call ddc#enable()
 
+
+
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 set tags=.tags;$HOME
 function! s:execute_ctags() abort
@@ -278,6 +282,14 @@ augroup ctags
   autocmd!
   autocmd BufWritePost * call s:execute_ctags()
 augroup END
+
+let g:UltiSnipsExpandTrigger="<c-e>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/UltiSnips']
 
 let g:floaterm_title = 'terminal: [$1/$2]'
 let g:floaterm_width = 0.7
