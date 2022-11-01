@@ -55,6 +55,7 @@ brew "universal-ctags"
 brew "lazygit"
 brew "graphviz"
 brew "efm-langserver"
+brew "go"
 
 cask "vlc"
 cask "vagrant"
