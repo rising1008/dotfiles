@@ -1,4 +1,4 @@
-# rising's dotfiles
+# dotfiles
 
 > Warning
 >
@@ -88,10 +88,13 @@ $ pip install -r ~/.dotfiles/settings/nvim/requirements
 Node.jsをインストール
 
 ```
-$ node ls-remote
-$ node install-binary v16.x.x
-$ node use v16.x.x
+$ nodebrew setup
+$ nodebrew ls-remote
+$ nodebrew install-binary v16.x.x
+$ nodebrew use v16.x.x
 ```
+
+#### Google IME
 
 ## Usages
 

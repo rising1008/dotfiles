@@ -13,6 +13,7 @@ alias ~="cd ~"
 alias iosls="xcrun simctl list devices"
 
 # for shortcut.
+alias ls='ls -G'
 alias v="/usr/local/bin/vim"
 alias g="git"
 alias h="history"

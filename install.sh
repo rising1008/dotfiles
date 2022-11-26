@@ -44,17 +44,17 @@ install_packages () {
 
 setup_neovim () {
   : install dein.vim
-  if [ ! -d "${HOME}"/.cache/dein/repos/github.com/Shougo/dein.vim ]; then
-    curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > "${HOME}"/installer.sh
-    sh "${HOME}"/installer.sh "${HOME}"/.cache/dein
-    rm "${HOME}/installer.sh"
-  fi
+  #if [ ! -d "${HOME}"/.cache/dein/repos/github.com/Shougo/dein.vim ]; then
+  #  curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > "${HOME}"/installer.sh
+  #  sh "${HOME}"/installer.sh "${HOME}"/.cache/dein
+  #  rm "${HOME}/installer.sh"
+  #fi
   : setup configuration files
-  if [ ! -d "${HOME}/.config" ]; then
-    mkdir -p "${HOME}/.config"
-    ln -snf "${SCRIPT_DIR}/settings/nvim" "${HOME}/.config"
-    ln -snf "${SCRIPT_DIR}/settings/efm-langserver" "${HOME}/.config"
-  fi
+  #if [ ! -d "${HOME}/.config" ]; then
+  #  mkdir -p "${HOME}/.config"
+  #  ln -snf "${SCRIPT_DIR}/settings/nvim" "${HOME}/.config"
+  #  ln -snf "${SCRIPT_DIR}/settings/efm-langserver" "${HOME}/.config"
+  #fi
 }
 
 setup_zsh () {
@@ -73,6 +73,8 @@ setup_vscode () {
   cp "${HOME}/Library/Application\ Support/Code/User/settings.json" "${BACKUP_DIR}/settings.json"
   #ln -snf ${TARGET_DIR}/settings/vscode/keybindings.json ${HOME}/Library/Application\ Support/Code/User/keybindings.json
   #ln -snf ${TARGET_DIR}/settings/vscode/settings.json ${HOME}/Library/Application\ Support/Code/User/settings.json
+  code --install-extension asvetliakov.vscode-neovim
+  code --install-extension EditorConfig.EditorConfig
 }
 
 setup_iterms () {
@@ -110,20 +112,20 @@ install_homebrew
 printf -- '  Install packages...\n';
 install_packages
 
-printf -- '  Set up neovim...\n';
-setup_neovim
-
 printf -- '  Set up zsh...\n';
 setup_zsh
 
+# printf -- '  Set up neovim...\n';
+# setup_neovim
+
 printf -- '  Set up iTerms...\n';
-setup_iterms "${SCRIPT_DIR}" "${BACKUP_DIR}"
+# setup_iterms "${SCRIPT_DIR}" "${BACKUP_DIR}"
 
 printf -- '  Set up git...\n';
-setup_git
+# setup_git
 
-printf -- '  Set up VS Code...\n';
-#setup_vscode "${BACKUP_DIR}"
+# printf -- '  Set up VS Code...\n';
+# setup_vscode "${BACKUP_DIR}"
 
 printf -- '  Set up Mac OS...\n';
-setup_macos
+# setup_macos

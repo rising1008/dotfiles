@@ -1,81 +1,26 @@
-vim.opt.shortmess = "I"
-vim.opt.visualbell = false
-vim.opt.errorbells = false
-vim.opt.modifiable = true
-vim.opt.clipboard = "unnamedplus"
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.whichwrap = "b,s,[,],<,>"
-vim.opt.backspace = "indent,eol,start"
-vim.opt.ambiwidth = "single"
-vim.opt.wildmenu = true
-vim.opt.cmdheight = 1
-vim.opt.laststatus = 2
-vim.opt.showcmd = true
-vim.opt.hlsearch = true
-vim.opt.showtabline = 2
-vim.opt.showmode = false
-vim.opt.winblend = 20
-vim.opt.pumblend = 20
-vim.opt.termguicolors=true
-vim.opt.swapfile = false
-vim.opt.fileencoding = "utf-8"
-vim.opt.cursorline = true
-vim.opt.shiftwidth = 2
-vim.opt.tabstop = 2
-vim.opt.expandtab = true
-vim.opt.autoindent = true
-vim.opt.smartindent = true
+require('plugins')
+require('options')
+require('colorscheme')
+require('keymaps')
+require('plugin-vfiler')
+require('plugin-lualine')
+-- require('plugin-vim-airline')
+require('plugin-vim-gitgutter')
+require('plugin-floaterm')
 
 vim.cmd[[autocmd BufWritePost plugins.lua PackerCompile]]
-require'plugins'
-
-vim.cmd('colorscheme iceberg')
-
--- 'vim-airline/vim-airline' ---------------------------------------------------
-vim.cmd 'let g:airline_symbols_ascii = 1'
-vim.cmd 'let g:airline#extensions#tabline#enabled = 1'
-vim.cmd 'let g:airline#extensions#whitespace#mixed_indent_algo = 1'
-
--- 'vim-airline/vim-airline-themes' --------------------------------------------
-vim.cmd 'let g:airline_theme = "iceberg"'
-
-function start_exprolorer()
-  
-  local configs = {
-    options = {
-      auto_cd = true,
-      auto_resize = true,
-      keep = true,
-      name = 'exp',
-      layout = 'left',
-      width = 36,
-      columns = 'indent,devicons,name,git',
-      show_hidden_files = true,
-      git = {
-        enabled = true,
-        untracked = true,
-        ignored = true,
-      },
-    },
-  }
-  
-  -- 現在開いているファイルのディレクトリを取得する
-  local path = vim.fn.bufname(vim.fn.bufnr())
-  if vim.fn.isdirectory(path) ~= 1 then
-    path = vim.fn.getcwd()
-  end
-  path = vim.fn.fnamemodify(path, ':p:h')
-  
-  -- Lua 関数による起動
-  require'vfiler'.start(path, configs)
-  
-end
 
 require('mason').setup()
 require('mason-lspconfig').setup_handlers({ function(server)
   local opt = {
     on_attach = function(client, bufnr)
+      if client.server_capabilities.documentFormattingProvider then
+        vim.api.nvim_create_autocmd('BufWritePre', {
+          group = vim.api.nvim_create_augroup('Format', { clear = true }),
+          buffer = bufnr,
+          callback = function() vim.lsp.buf.format() end
+        })
+      end
       -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
       local opts = { noremap=true, silent=true }
       vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
@@ -118,8 +63,23 @@ cmp.setup({
     -- { name = "vsnip" },
     { name = "buffer" },
     { name = "path" },
+    {name = 'cmdline'}
   },
   mapping = cmp.mapping.preset.insert({
+    ['<Tab>'] = function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      else
+        fallback()
+      end
+    end,
+    ['<S-Tab>'] = function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      else
+        fallback()
+      end
+    end,
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -131,6 +91,13 @@ cmp.setup({
   experimental = {
     ghost_text = true,
   },
+  formatting = {
+    format = require('lspkind').cmp_format({
+      mode = 'symbol_text',
+      maxwidth = 50,
+      ellipsis_char = '...'
+    })
+  }
 })
 cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline(),
@@ -152,9 +119,3 @@ require('glow').setup({
 })
 
 vim.cmd 'let g:tagbar_ctags_bin = "/usr/local/bin/ctags"'
-
-vim.api.nvim_set_keymap('i', 'jj', '<ESC>', {silent=true})
-vim.api.nvim_set_keymap('n', '<C-n>', ':<C-u>setlocal relativenumber!<CR>', {silent=true})
-vim.api.nvim_set_keymap('n', '<C-e>', ':call v:lua.start_exprolorer()<CR>', {silent=true})
-vim.api.nvim_set_keymap('n', '<C-f>', '<Cmd> VFiler -layout=floating -name=explore<CR>', {silent=true})
-vim.keymap.set('n', '<C-t>', ':TagbarToggle<CR>')
