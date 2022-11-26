@@ -1,0 +1,40 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "command": "vscode-neovim.compositeEscape1",
+        "key": "j",
+        "when": "neovim.mode == insert && editorTextFocus",
+        "args": "j"
+    }
+    {
+        "key": "space d",
+        "command": "editor.action.goToDeclaration",
+        "when": "neovim.mode == normal && editorTextFocus",
+    },
+    {
+        "key": "space b",
+        "command": "workbench.action.navigateBack",
+        "when": "neovim.mode == normal && editorTextFocus",
+    },    
+    {
+        "key": "space h",
+        "command": "editor.action.showHover",
+        "when": "neovim.mode == normal && editorTextFocus",
+    },
+    {
+        "key": "space e",
+        "command": "workbench.view.explorer"
+    },
+    {
+        "key": "space t",
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "space ,",
+        "command": "workbench.action.navigateForward"
+    },
+    {
+        "key": "space .",
+        "command": "workbench.action.navigateBack"
+    }
+]

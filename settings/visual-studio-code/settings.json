@@ -1,0 +1,6 @@
+{
+    "workbench.startupEditor": "none",
+    "vscode-neovim.useCtrlKeysForInsertMode": false,
+    "vscode-neovim.useCtrlKeysForNormalMode": false,
+    "vscode-neovim.neovimInitVimPaths.darwin": "~/.config/visual-studio-code/init.vim"
+}
