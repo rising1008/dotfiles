@@ -21,6 +21,7 @@ brew "m-cli"
 brew "imagemagick"
 brew "awscli"
 brew "aws-sam-cli"
+brew "cloudformation-cli"
 brew "bat"
 brew "antiword"
 brew "shellcheck"
@@ -56,6 +57,7 @@ brew "lazygit"
 brew "graphviz"
 brew "efm-langserver"
 brew "go"
+brew "colordiff"
 
 cask "vlc"
 cask "vagrant"
@@ -87,6 +89,7 @@ cask "font-hackgen-nerd"
 cask "fliqlo"
 cask "adoptopenjdk16"
 cask "intellij-idea-ce"
+cask "the-unarchiver"
 
 #mas "Xcode", id: 497799835
 #mas "Hex Fiend", id: 1342896380
