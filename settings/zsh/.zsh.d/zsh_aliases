@@ -1,6 +1,6 @@
 # for docker
 alias dcc="docker ps -aq -f status=exited -f status=dead | xargs docker rm"
-alias dic="docker images -f "dangling=true" -q | xargs docker rmi"
+alias dic="docker images -f dangling=true -q | xargs docker rmi"
 
 # for navigation.
 alias ..="cd .."
@@ -19,3 +19,7 @@ alias g="git"
 alias h="history"
 alias lock="m screensaver"
 alias dnsflush='dscacheutil -flushcache'
+
+# for diff.
+alias diff='diff -u | less -R'
+alias diffs='diff -y | less -R'

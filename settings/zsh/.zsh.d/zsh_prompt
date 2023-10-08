@@ -37,14 +37,15 @@ CNT=$(echo ${MSG} | wc -m )
 COL=$(( COLUMNS - 7 - ${CNT}))
 CURRENT_DIR="$(pwd)"
 DIR=${CURRENT_DIR##*/}
-MSG=$(echo "%F{031}%f%K{031}%F{254}   %f%F{254} ${DIR} %f%F{084}${vcs_info_msg_0_} %f%k%F{031}%f \e[$((${COLUMNS} - 10))G %F{172}%f%K{172}%F{007}  %T %f%k")
+#MSG=$(echo "%F{031}%f%K{031}%F{254}   %f%F{254} ${DIR} %f%F{084}${vcs_info_msg_0_} %f%k%F{031}%f \e[$((${COLUMNS} - 10))G %F{172}%f%K{172}%F{007}  %T %f%k")
+MSG=$(echo "%K{031}%F{254}   %f%F{254} ${DIR} %f%F{084}${vcs_info_msg_0_} %f%k%F{031}%f \e[$((${COLUMNS} - 10))G %F{172}%f%K{172}%F{007}  %T %f%k")
 PROMPT="╭─ ${MSG}
-╰─%F{003}%f "
+╰─%F{003}%f "
 }
 add-zsh-hook precmd current
 
 update() {
-PROMPT=" %(?.%F{084}.%F{197})%f "
+PROMPT=" %(?.%F{084}.%F{197})%f "
 zle .reset-prompt
 zle .accept-line
 }
