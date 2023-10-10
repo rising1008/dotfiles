@@ -1,34 +1,55 @@
 #!/usr/bin/env bash
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE:-$0}")" && pwd)"
-
-source "${SCRIPT_DIR}/lib/utils.sh"
-
 : --------------------------------------------------
 :  Constraints
 : --------------------------------------------------
 VERSION="0.1.0"
 OS_TYPE="$(uname -s)"
 TIMESTAMP=$(date  "+%Y%m%d-%H%M%S")
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE:-$0}")" && pwd)"
 BACKUP_DIR="${HOME}/.backup/${TIMESTAMP}"
 ORIGIN_BACKUP_DIR="${HOME}/.backup/origin"
+
+readonly VERSION
+readonly OS_TYPE
+readonly TIMESTAMP
+readonly SCRIPT_DIR
+readonly BACKUP_DIR
+readonly ORIGIN_BACKUP_DIR
+
+: --------------------------------------------------
+:  Load libs
+: --------------------------------------------------
+source "${SCRIPT_DIR}/lib/utils.sh"
 
 : --------------------------------------------------
 :  Functions
 : --------------------------------------------------
 banner() {
-  printf -- "\n"
-  printf -- "  dotfiles _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/\n"
-  printf -- "\n"
-  printf -- "  VERSION: %s\n" "$1"
-  printf -- "  OS_TYPE: %s\n" "$2"
-  printf -- " _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/\n"
-  printf -- "\n"
+  p "\n  dotfiles _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/\n" "info"
+  p "\n" "info"
+  p "  VERSION: ${1}\n" "info" "info"
+  p "  OS_TYPE: ${2}\n" "info" "info"
+  p " _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/\n" "info"
+  p "\n" "info"
 }
 
-init () {
-  [ -d "${ORIGIN_BACKUP_DIR}" ] || mkdir -p "${ORIGIN_BACKUP_DIR}"
-  [ -d "${BACKUP_DIR}" ] || mkdir -p "${BACKUP_DIR}"
+function init () {
+  local origin_backup_dir
+  local backup_dir
+
+  origin_backup_dir=$1
+  backup_dir=$2
+
+  if [[ ! -d ${origin_backup_dir} ]]; then
+    p "  Create ${origin_backup_dir} directory.\n" "info"
+    mkdir -p "${origin_backup_dir}"
+  fi
+
+  if [[ ! -d ${backup_dir} ]]; then
+    p "  Create ${backup_dir} directory.\n" "info"
+    mkdir -p "${backup_dir}"
+  fi
 }
 
 install_homebrew () {
@@ -43,24 +64,21 @@ install_packages () {
 }
 
 setup_neovim () {
-  : install dein.vim
-  #if [ ! -d "${HOME}"/.cache/dein/repos/github.com/Shougo/dein.vim ]; then
-  #  curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > "${HOME}"/installer.sh
-  #  sh "${HOME}"/installer.sh "${HOME}"/.cache/dein
-  #  rm "${HOME}/installer.sh"
-  #fi
-  : setup configuration files
-  #if [ ! -d "${HOME}/.config" ]; then
-  #  mkdir -p "${HOME}/.config"
-  #  ln -snf "${SCRIPT_DIR}/settings/nvim" "${HOME}/.config"
-  #  ln -snf "${SCRIPT_DIR}/settings/efm-langserver" "${HOME}/.config"
-  #fi
+  if [[ ! -d ~/.config/nvim ]]; then
+    ln -snf "${SCRIPT_DIR}/settings/nvim" "${HOME}/.config/nvim"
+  fi
 }
 
 setup_zsh () {
-  [ ! -f "${HOME}/.zshrc" ] && ln -snf "${SCRIPT_DIR}/settings/zsh/.zshrc" "${HOME}"
-  [ ! -f "${HOME}/.zshenv" ] && ln -snf "${SCRIPT_DIR}/settings/zsh/.zshenv" "${HOME}"
-  if [ ! -d "${HOME}/.zsh.d" ]; then
+  if [[ ! -L ${HOME}/.zshrc ]]; then
+    ln -snf "${SCRIPT_DIR}/settings/zsh/.zshrc" "${HOME}"
+  fi
+
+  if [[ ! -L ${HOME}/.zshenv ]]; then
+    ln -snf "${SCRIPT_DIR}/settings/zsh/.zshenv" "${HOME}"
+  fi
+
+  if [[ ! -d ${HOME}/.zsh.d ]]; then
     ln -snf "${SCRIPT_DIR}/settings/zsh/.zsh.d" "${HOME}"
   fi
 }
@@ -78,9 +96,6 @@ setup_vscode () {
 }
 
 setup_iterms () {
-  local SCRIPT_DIR=$1
-  local BACKUP_DIR=$2
-
   : backup
   if [ -f "${ORIGIN_BACKUP_DIR}/com.googlecode.iterm2.plist" ]; then
     cp "${HOME}/Library/Preferences/com.googlecode.iterm2.plist" "${BACKUP_DIR}/com.googlecode.iterm2.plist"
@@ -104,25 +119,26 @@ setup_macos () {
 : --------------------------------------------------
 banner "${VERSION}" "${OS_TYPE}"
 
-init
+init "${ORIGIN_BACKUP_DIR}" "${BACKUP_DIR}"
 
-printf -- '  Install homebrew...\n';
+p '  Install homebrew...\n' 'info';
 install_homebrew
 
-printf -- '  Install packages...\n';
+p '  Install packages...\n' 'info';
 install_packages
 
-printf -- '  Set up zsh...\n';
+p '\n  Set up zsh...\n';
 setup_zsh
 
-# printf -- '  Set up neovim...\n';
-# setup_neovim
+printf -- '  Set up neovim...\n';
+setup_neovim
 
 printf -- '  Set up iTerms...\n';
+# 設定ファイルの場所を指定することで対応
 # setup_iterms "${SCRIPT_DIR}" "${BACKUP_DIR}"
 
 printf -- '  Set up git...\n';
-# setup_git
+setup_git
 
 # printf -- '  Set up VS Code...\n';
 # setup_vscode "${BACKUP_DIR}"

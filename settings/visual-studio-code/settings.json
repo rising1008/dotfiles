@@ -1,6 +1,40 @@
 {
     "workbench.startupEditor": "none",
-    "vscode-neovim.useCtrlKeysForInsertMode": false,
-    "vscode-neovim.useCtrlKeysForNormalMode": false,
-    "vscode-neovim.neovimInitVimPaths.darwin": "~/.config/visual-studio-code/init.vim"
+    // ソースコードのミニマップの表示
+    "editor.minimap.enabled": false,
+    // ホワイトスペースの表示方法[all|boundary]
+    "editor.renderWhitespace": "all",
+    // 余分なホワイトスペースを削除
+    "files.trimTrailingWhitespace": true,
+    "vscode-neovim.useCtrlKeysForInsertMode": true,
+    "vscode-neovim.useCtrlKeysForNormalMode": true,
+    "vscode-neovim.neovimInitVimPaths.darwin": "~/.config/visual-studio-code/init.vim",
+    "aws.telemetry": false,
+    "workbench.iconTheme": "vscode-icons",
+    "editor.guides.bracketPairs": true,
+    "editor.fontFamily": "Menlo, Monaco, 'Courier New', monospace, Hack Nerd Font Mono",
+    "editor.fontSize": 14,
+    "terminal.integrated.fontSize": 12,
+    "cSpell.userWords": [
+        "amazonlinux",
+        "buildspec",
+        "cfnt"
+    ],
+    "vsicons.dontShowNewVersionMessage": true,
+    "editor.lineNumbers": "on",
+    "workbench.colorTheme": "Iceberg",
+    "settings.cycle": [],
+    "telemetry.telemetryLevel": "off",
+    "settingsSync.ignoredExtensions": [],
+    "cfnLint.path": "/usr/local/bin/cfn-lint",
+    "settingsSync.ignoredSettings": [],
+    "settingsSync.keybindingsPerPlatform": false,
+    "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
+    "editor.inlineSuggest.enabled": true,
+    "eslint.workingDirectories": [
+        { "mode": "auto" }
+    ],
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    }
 }

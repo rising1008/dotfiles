@@ -58,6 +58,7 @@ brew "graphviz"
 brew "efm-langserver"
 brew "go"
 brew "colordiff"
+brew "shfmt"
 
 cask "vlc"
 cask "vagrant"

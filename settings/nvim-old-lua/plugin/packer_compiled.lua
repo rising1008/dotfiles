@@ -94,35 +94,30 @@ _G.packer_plugins = {
     path = "/Users/shin/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
-  ["fern-git-status.vim"] = {
-    loaded = true,
-    path = "/Users/shin/.local/share/nvim/site/pack/packer/start/fern-git-status.vim",
-    url = "https://github.com/lambdalisue/fern-git-status.vim"
-  },
-  ["fern-renderer-web-devicons.nvim"] = {
-    loaded = true,
-    path = "/Users/shin/.local/share/nvim/site/pack/packer/start/fern-renderer-web-devicons.nvim",
-    url = "https://github.com/TheLeoP/fern-renderer-web-devicons.nvim"
-  },
-  ["fern.vim"] = {
-    loaded = true,
-    path = "/Users/shin/.local/share/nvim/site/pack/packer/start/fern.vim",
-    url = "https://github.com/lambdalisue/fern.vim"
-  },
   ["fzf-lua"] = {
     loaded = true,
     path = "/Users/shin/.local/share/nvim/site/pack/packer/start/fzf-lua",
     url = "https://github.com/ibhagwan/fzf-lua"
   },
-  ["glyph-palette.vim"] = {
+  ["glow.nvim"] = {
     loaded = true,
-    path = "/Users/shin/.local/share/nvim/site/pack/packer/start/glyph-palette.vim",
-    url = "https://github.com/lambdalisue/glyph-palette.vim"
+    path = "/Users/shin/.local/share/nvim/site/pack/packer/start/glow.nvim",
+    url = "https://github.com/ellisonleao/glow.nvim"
   },
   ["iceberg.vim"] = {
     loaded = true,
     path = "/Users/shin/.local/share/nvim/site/pack/packer/start/iceberg.vim",
     url = "https://github.com/cocopon/iceberg.vim"
+  },
+  ["lexima.vim"] = {
+    loaded = true,
+    path = "/Users/shin/.local/share/nvim/site/pack/packer/start/lexima.vim",
+    url = "https://github.com/cohama/lexima.vim"
+  },
+  ["lspkind-nvim"] = {
+    loaded = true,
+    path = "/Users/shin/.local/share/nvim/site/pack/packer/start/lspkind-nvim",
+    url = "https://github.com/onsails/lspkind-nvim"
   },
   ["lualine.nvim"] = {
     loaded = true,
@@ -150,9 +145,10 @@ _G.packer_plugins = {
     url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-web-devicons"] = {
-    loaded = true,
-    path = "/Users/shin/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
-    url = "https://github.com/nvim-tree/nvim-web-devicons"
+    loaded = false,
+    needs_bufread = false,
+    path = "/Users/shin/.local/share/nvim/site/pack/packer/opt/nvim-web-devicons",
+    url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
   ["packer.nvim"] = {
     loaded = false,
@@ -160,15 +156,45 @@ _G.packer_plugins = {
     path = "/Users/shin/.local/share/nvim/site/pack/packer/opt/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
-  ["scrollbar.nvim"] = {
+  ["spelunker.vim"] = {
     loaded = true,
-    path = "/Users/shin/.local/share/nvim/site/pack/packer/start/scrollbar.nvim",
-    url = "https://github.com/Xuyuanp/scrollbar.nvim"
+    path = "/Users/shin/.local/share/nvim/site/pack/packer/start/spelunker.vim",
+    url = "https://github.com/kamykn/spelunker.vim"
   },
-  ["vim-vsnip"] = {
+  tagbar = {
     loaded = true,
-    path = "/Users/shin/.local/share/nvim/site/pack/packer/start/vim-vsnip",
-    url = "https://github.com/hrsh7th/vim-vsnip"
+    path = "/Users/shin/.local/share/nvim/site/pack/packer/start/tagbar",
+    url = "https://github.com/preservim/tagbar"
+  },
+  ["vfiler-column-devicons"] = {
+    loaded = true,
+    path = "/Users/shin/.local/share/nvim/site/pack/packer/start/vfiler-column-devicons",
+    url = "https://github.com/obaland/vfiler-column-devicons"
+  },
+  ["vfiler.vim"] = {
+    loaded = true,
+    path = "/Users/shin/.local/share/nvim/site/pack/packer/start/vfiler.vim",
+    url = "https://github.com/obaland/vfiler.vim"
+  },
+  ["vim-devicons"] = {
+    loaded = true,
+    path = "/Users/shin/.local/share/nvim/site/pack/packer/start/vim-devicons",
+    url = "https://github.com/ryanoasis/vim-devicons"
+  },
+  ["vim-floaterm"] = {
+    loaded = true,
+    path = "/Users/shin/.local/share/nvim/site/pack/packer/start/vim-floaterm",
+    url = "https://github.com/voldikss/vim-floaterm"
+  },
+  ["vim-fugitive"] = {
+    loaded = true,
+    path = "/Users/shin/.local/share/nvim/site/pack/packer/start/vim-fugitive",
+    url = "https://github.com/tpope/vim-fugitive"
+  },
+  ["vim-gitgutter"] = {
+    loaded = true,
+    path = "/Users/shin/.local/share/nvim/site/pack/packer/start/vim-gitgutter",
+    url = "https://github.com/airblade/vim-gitgutter"
   },
   ["vimdoc-ja"] = {
     loaded = true,

@@ -5,36 +5,52 @@
         "key": "j",
         "when": "neovim.mode == insert && editorTextFocus",
         "args": "j"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "settings.cycle",
+        "when": "editorTextFocus",
+        "args": {
+            "id": "relativeLineNumbers",
+            "values": [
+                {
+                    "editor.lineNumbers": "on"
+                },
+                {
+                    "editor.lineNumbers": "relative"
+                }
+            ]
+        }
     }
-    {
-        "key": "space d",
-        "command": "editor.action.goToDeclaration",
-        "when": "neovim.mode == normal && editorTextFocus",
-    },
-    {
-        "key": "space b",
-        "command": "workbench.action.navigateBack",
-        "when": "neovim.mode == normal && editorTextFocus",
-    },    
-    {
-        "key": "space h",
-        "command": "editor.action.showHover",
-        "when": "neovim.mode == normal && editorTextFocus",
-    },
-    {
-        "key": "space e",
-        "command": "workbench.view.explorer"
-    },
-    {
-        "key": "space t",
-        "command": "workbench.action.toggleSidebarVisibility"
-    },
-    {
-        "key": "space ,",
-        "command": "workbench.action.navigateForward"
-    },
-    {
-        "key": "space .",
-        "command": "workbench.action.navigateBack"
-    }
+    //{
+    //    "key": "space d",
+    //    "command": "editor.action.goToDeclaration",
+    //    "when": "neovim.mode == normal && editorTextFocus",
+    //},
+    //{
+    //    "key": "space b",
+    //    "command": "workbench.action.navigateBack",
+    //    "when": "neovim.mode == normal && editorTextFocus",
+    //},
+    //{
+    //    "key": "space h",
+    //    "command": "editor.action.showHover",
+    //    "when": "neovim.mode == normal && editorTextFocus",
+    //},
+    //{
+    //    "key": "space e",
+    //    "command": "workbench.view.explorer"
+    //},
+    //{
+    //    "key": "space t",
+    //    "command": "workbench.action.toggleSidebarVisibility"
+    //},
+    //{
+    //    "key": "space ,",
+    //    "command": "workbench.action.navigateForward"
+    //},
+    //{
+    //    "key": "space .",
+    //    "command": "workbench.action.navigateBack"
+    //}
 ]
