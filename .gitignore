@@ -7,3 +7,5 @@ Brewfile.lock.json
 *.swp
 
 /bin
+
+*.log
