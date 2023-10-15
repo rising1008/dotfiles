@@ -9,3 +9,5 @@ Brewfile.lock.json
 /bin
 
 *.log
+
+lazy-lock.json
