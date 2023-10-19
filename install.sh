@@ -142,9 +142,9 @@ printf -- '  Set up iTerms...\n'
 # setup_iterms "${SCRIPT_DIR}" "${BACKUP_DIR}"
 
 printf -- '  Set up tmux...\n'
-setup_tmux
+#setup_tmux
 printf -- '  Set up git...\n'
-setup_git
+#setup_git
 
 # printf -- '  Set up VS Code...\n';
 # setup_vscode "${BACKUP_DIR}"

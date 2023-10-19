@@ -61,6 +61,19 @@ For more information, see: https://github.com/junegunn/fzf
 
 ### NeoVim
 
+#### LSP関連
+
+##### Formatting
+
+
+| #  | Language | Reference                   |
+| -: | :------- | :-------------------------- |
+|  1 | sh       | https://github.com/mvdan/sh |
+
+
+
+
+
 プラグインが依存するアプリケーション、及び、言語ごとのライブラリのインストールが必要です。
 
 #### OS X
@@ -133,3 +146,4 @@ dotfiles
 ## References
 
   - [zsh日本語マニュアル](http://www.ayu.ics.keio.ac.jp/~mukai/translate/zshoptions.html)
+
