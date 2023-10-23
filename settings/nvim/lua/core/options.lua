@@ -1,7 +1,9 @@
 local opt = vim.opt
 
+opt.fileencoding = "utf-8"
+
 -- messages
-opt.shortmess = 'I'
+opt.shortmess = "I"
 
 -- line numbers
 opt.number = true
@@ -26,17 +28,17 @@ opt.cursorline = true
 
 -- appearance
 opt.termguicolors = true
-opt.background = 'dark'
-opt.signcolumn = 'yes'
+opt.background = "dark"
+opt.signcolumn = "yes"
 
 -- backspace
-opt.backspace = 'indent,eol,start'
+opt.backspace = "indent,eol,start"
 
 -- clipboard
-opt.clipboard = 'unnamedplus'
+opt.clipboard = "unnamedplus"
 
 -- mouse
-opt.mouse = 'a'
+opt.mouse = "a"
 
 -- split windows
 opt.splitright = true
@@ -48,16 +50,16 @@ opt.errorbells = false
 
 -- folding
 
-opt.foldmethod = 'indent'
+opt.foldmethod = "indent"
 opt.foldlevel = 2
-opt.foldcolumn = '3'
+opt.foldcolumn = "3"
 
 -- spell check
 opt.spell = false
 
 opt.modifiable = true
-opt.whichwrap = 'b,s,[,],<,>'
-opt.ambiwidth = 'single'
+opt.whichwrap = "b,s,[,],<,>"
+opt.ambiwidth = "single"
 opt.wildmenu = true
 opt.cmdheight = 1
 opt.laststatus = 3
@@ -74,9 +76,10 @@ opt.undofile = false
 
 opt.updatetime = 300
 
-opt.fileencoding = 'utf-8'
+opt.fileencoding = "utf-8"
 
 opt.list = true
 --opt.listchars = 'tab:-\,tail:.'
 
 opt.textwidth = 0
+

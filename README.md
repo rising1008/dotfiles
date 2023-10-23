@@ -98,6 +98,8 @@ $ pip install -r ~/.dotfiles/settings/nvim/requirements
 
 #### Node.js
 
+Masonがが Node.jsに依存しているため予めインストールしておく。
+
 Node.jsをインストール
 
 ```

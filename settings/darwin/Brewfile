@@ -62,6 +62,7 @@ brew "colordiff"
 brew "shfmt"
 brew "stylua"
 brew "gotop"
+brew "gh"
 
 cask "vlc"
 cask "vagrant"
