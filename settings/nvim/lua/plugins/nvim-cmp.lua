@@ -50,6 +50,11 @@ return {
 					ellipsis_char = "...",
 				}),
 			},
+			window = {
+				documentation = {
+					border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+				},
+			},
 			-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 			cmp.setup.cmdline({ "/", "?" }, {
 				mapping = cmp.mapping.preset.cmdline(),
