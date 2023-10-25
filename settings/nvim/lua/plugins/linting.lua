@@ -1,3 +1,5 @@
+-- @see: https://neovimcraft.com/plugin/mfussenegger/nvim-lint
+-- @see: https://github.com/mfussenegger/nvim-lint
 return {
 	"mfussenegger/nvim-lint",
 	lazy = true,
@@ -12,6 +14,7 @@ return {
 			typescriptreact = { "eslint_d" },
 			python = { "pylint" },
 			sh = { "shellcheck" },
+			cfnt = { "cfn_lint" },
 		}
 
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
