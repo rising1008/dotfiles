@@ -1,5 +1,6 @@
 local opt = vim.opt
 
+vim.cmd("language en_US")
 opt.fileencoding = "utf-8"
 
 -- messages
@@ -82,4 +83,3 @@ opt.list = true
 --opt.listchars = 'tab:-\,tail:.'
 
 opt.textwidth = 0
-

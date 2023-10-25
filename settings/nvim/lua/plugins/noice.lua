@@ -35,6 +35,14 @@ return {
 					["cmp.entry.get_documentation"] = true,
 				},
 			},
+			-- you can enable a preset for easier configuration
+			presets = {
+				bottom_search = false, -- use a classic bottom cmdline for search
+				command_palette = true, -- position the cmdline and popupmenu together
+				long_message_to_split = true, -- long messages will be sent to a split
+				inc_rename = false, -- enables an input dialog for inc-rename.nvim
+				lsp_doc_border = false, -- add a border to hover docs and signature help
+			},
 			messages = {
 				view_search = "mini",
 			},
@@ -45,6 +53,37 @@ return {
 				},
 				{
 					filter = {
+						event = "msg_show",
+						kind = "search_count",
+					},
+					opts = { skip = true },
+				},
+				{
+					filter = {
+						event = "msg_show",
+						kind = "",
+						find = "lines",
+					},
+					opts = { skip = true, stop = true },
+				},
+				{
+					filter = {
+						event = "msg_show",
+						kind = "",
+						find = "Modified",
+					},
+					opts = { skip = true, stop = true },
+				},
+				{
+					filter = {
+						event = "msg_show",
+						kind = "",
+						find = "search hit .*, continuing at",
+					},
+					opts = { skip = true, stop = true },
+				},
+				{
+					filter = {
 						event = "notify",
 						warning = true,
 						find = "failed to run generator.*is not executable",
@@ -52,7 +91,6 @@ return {
 					opts = { skip = true },
 				},
 				myMiniView("NvimTree"),
-				myMiniView("lines"),
 				myMiniView("Already at .* change"),
 				myMiniView("written"),
 				myMiniView("yanked"),
@@ -64,8 +102,7 @@ return {
 				myMiniView("line less"),
 				myMiniView("lines indented"),
 				myMiniView("No lines in buffer"),
-				myMiniView("search hit .*, continuing at", "wmsg"),
-				myMiniView("E486: Pattern not found", "emsg"),
+				myMiniView("E486: ", "emsg"),
 			},
 		})
 	end,
