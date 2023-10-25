@@ -8,9 +8,18 @@ if not vim.loop.fs_stat(lazypath) then
 		"--branch=stable", -- latest stable release
 		lazypath,
 	})
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
 end
 vim.opt.rtp:prepend(lazypath)
 
+require("lazy").setup("plugins")
 require("lazy").setup({
 	{ import = "plugins" },
 	{ import = "plugins.lsp" },
