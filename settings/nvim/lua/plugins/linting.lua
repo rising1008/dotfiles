@@ -1,5 +1,6 @@
 -- @see: https://neovimcraft.com/plugin/mfussenegger/nvim-lint
 -- @see: https://github.com/mfussenegger/nvim-lint
+-- @see: https://github.com/mfussenegger/nvim-lint/tree/master/lua/lint/linters
 return {
 	"mfussenegger/nvim-lint",
 	lazy = true,
