@@ -52,7 +52,7 @@ opt.errorbells = false
 -- folding
 
 opt.foldmethod = "indent"
-opt.foldlevel = 2
+opt.foldlevel = 5
 opt.foldcolumn = "3"
 
 -- spell check

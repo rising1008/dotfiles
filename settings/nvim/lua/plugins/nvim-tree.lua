@@ -64,5 +64,16 @@ return {
 		) -- toggle file explorer on current file
 		keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse file explorer" }) -- collapse file explorer
 		keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" }) -- refresh file explorer
+
+		-- set autocmds
+		vim.api.nvim_create_autocmd({ "BufReadPost" }, {
+			pattern = "*",
+			callback = function()
+				local path = vim.fn.expand("%:p:h")
+				if vim.fn.isdirectory(path) == 1 then
+					vim.cmd("NvimTreeClose")
+				end
+			end,
+		})
 	end,
 }
