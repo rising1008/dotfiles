@@ -4,8 +4,6 @@
 <dict>
 	<key>AdjustWindowForFontSizeChange</key>
 	<true/>
-	<key>AllowClipboardAccess</key>
-	<true/>
 	<key>AutoCommandHistory</key>
 	<true/>
 	<key>Custom Color Presets</key>
@@ -843,13 +841,13 @@
 			<key>Name</key>
 			<string>Default</string>
 			<key>Non Ascii Font</key>
-			<string>HackNerdFontCompleteM-Regular 11</string>
+			<string>HackNFM-Regular 11</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Non-ASCII Ligatures</key>
 			<false/>
 			<key>Normal Font</key>
-			<string>HackNerdFontCompleteM-Regular 11</string>
+			<string>HackNFM-Regular 11</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>

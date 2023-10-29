@@ -11,7 +11,14 @@ keymap.set("i", "jj", "<ESC>", { silent = true })
 
 -- keymap.set('n', '<leader>nh', ':nohl<CR>')
 
+-- relativenumber を切り替える
 keymap.set("n", "<C-n>", ":<C-u>setlocal relativenumber!<CR>", { silent = true })
+-- ビジュアルモードでハイライト行を纏めて移動する
+keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+-- allows search terms to stay in the middle
+keymap.set("n", "n", "nzzzv")
+keymap.set("n", "N", "Nzzzv")
 
 keymap.set("n", "<C-e>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer", silent = true })
 

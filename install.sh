@@ -126,25 +126,25 @@ banner "${VERSION}" "${OS_TYPE}"
 init "${ORIGIN_BACKUP_DIR}" "${BACKUP_DIR}"
 
 p '  Install homebrew...\n' 'info'
-install_homebrew
+#install_homebrew
 
 p '  Install packages...\n' 'info'
-install_packages
+#install_packages
 
 p '\n  Set up zsh...\n'
-# setup_zsh
+setup_zsh
 
+: test="test"
 printf -- '  Set up neovim...\n'
-# setup_neovim
+setup_neovim
 
 printf -- '  Set up iTerms...\n'
-# 設定ファイルの場所を指定することで対応
 # setup_iterms "${SCRIPT_DIR}" "${BACKUP_DIR}"
 
 printf -- '  Set up tmux...\n'
-#setup_tmux
+setup_tmux
 printf -- '  Set up git...\n'
-#setup_git
+setup_git
 
 # printf -- '  Set up VS Code...\n';
 # setup_vscode "${BACKUP_DIR}"
